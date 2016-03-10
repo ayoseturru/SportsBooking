@@ -1,0 +1,29 @@
+<% if flash[:notice] %>
+    <div id="modal" class="modal blue lighten-4">
+      <div class="modal-content">
+        <h4>Information</h4>
+        <p> <%= flash[:notice] %></p>
+      </div>
+      <div class="modal-footer blue lighten-4">
+        <a href="#!" class="blue  lighten-1 modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+      </div>
+    </div>
+<% elsif flash[:alert] %>
+    <div id="modal" class="modal red lighten-3">
+      <div class="modal-content">
+        <h4>Errors</h4>
+        <p> <%= flash[:alert] %></p>
+      </div>
+      <div class="modal-footer red lighten-3">
+        <a href="#!" class=" red lighten-1 modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+      </div>
+    </div>
+<% end %>
+
+<% if flash[:alert] || flash[:notice] %>
+    <script type="text/javascript" charset="utf-8">
+      $(document).ready(function () {
+        $('#modal').openModal();
+      });
+    </script>
+<% end %>

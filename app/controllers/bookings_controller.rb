@@ -15,6 +15,7 @@ class BookingsController < ApplicationController
   # GET /bookings/new
   def new
     @booking = Booking.new
+    flash[:alert] = "hey"
   end
 
   # GET /bookings/1/edit
@@ -62,13 +63,13 @@ class BookingsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_booking
-      @booking = Booking.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_booking
+    @booking = Booking.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def booking_params
-      params.require(:booking).permit(:sports_installation, :time_band)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def booking_params
+    params.require(:booking).permit(:sports_installation, :time_band)
+  end
 end
