@@ -1,0 +1,2 @@
+module TimeBandsHelper
+end

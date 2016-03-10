@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Installation:</strong>
+  <%= @sports_installation.installation_id %>
+</p>
+
+<p>
+  <strong>Sport:</strong>
+  <%= @sports_installation.sport_id %>
+</p>
+
+<%= link_to 'Edit', edit_sports_installation_path(@sports_installation) %> |
+<%= link_to 'Back', sports_installations_path %>

@@ -1,0 +1,21 @@
+<%= form_for(@time_band) do |f| %>
+  <% if @time_band.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@time_band.errors.count, "error") %> prohibited this time_band from being saved:</h2>
+
+      <ul>
+      <% @time_band.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :date %><br>
+    <%= f.date_select :date %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

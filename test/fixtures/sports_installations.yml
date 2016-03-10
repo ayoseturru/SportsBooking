@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  installation_id: 1
+  sport_id: 1
+
+two:
+  installation_id: 1
+  sport_id: 1
