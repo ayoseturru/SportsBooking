@@ -1,3 +1,3 @@
 class Sport < ActiveRecord::Base
-  has_many :installations, dependent: :destroy
+  has_and_belongs_to_many :installations, dependent: :destroy
 end

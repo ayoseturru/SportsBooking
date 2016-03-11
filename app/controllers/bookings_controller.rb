@@ -15,7 +15,6 @@ class BookingsController < ApplicationController
   # GET /bookings/new
   def new
     @booking = Booking.new
-    flash[:alert] = "hey"
   end
 
   # GET /bookings/1/edit
