@@ -31,3 +31,4 @@ end
 
 mock_time_band(7, 31, sports_installations) # July Timebands
 
+# Booking.create(sports_installation_id: sports_installations.first.id, time_band_id: TimeBand.first.id) Example of how to create a booking
