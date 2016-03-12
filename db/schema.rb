@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160311200123) do
+ActiveRecord::Schema.define(version: 20160312102825) do
 
   create_table "bookings", force: :cascade do |t|
     t.integer  "sports_installation"
@@ -45,6 +45,16 @@ ActiveRecord::Schema.define(version: 20160311200123) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
+
+  create_table "sports_installations_time_bands", force: :cascade do |t|
+    t.boolean  "free"
+    t.integer  "time_band_id"
+    t.integer  "sports_installation_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "sports_installations_time_bands", ["time_band_id"], name: "intermediate_tb"
 
   create_table "teams", force: :cascade do |t|
     t.integer  "user_id"

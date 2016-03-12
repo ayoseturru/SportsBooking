@@ -11,21 +11,23 @@ football = Sport.create(name: "Footabll", max_players: 22, installations: [footb
 basketball = Sport.create(name: "Basketball", max_players: 10, installations: [sports_center_installation, basketball_outdoor])
 
 
-SportsInstallation.create(sport_id: indoor_football.id, installation_id: outdoor_football_installation.id)
-SportsInstallation.create(sport_id: indoor_football.id, installation_id: sports_center_installation.id)
-SportsInstallation.create(sport_id: football_seven_a_side.id, installation_id: football_stadium.id)
-SportsInstallation.create(sport_id: football.id, installation_id: football_stadium.id)
-SportsInstallation.create(sport_id: basketball.id, installation_id: basketball_outdoor.id)
-SportsInstallation.create(sport_id: basketball.id, installation_id: sports_center_installation.id)
+sports_installations = [
+    SportsInstallation.create(sport_id: indoor_football.id, installation_id: outdoor_football_installation.id),
+    SportsInstallation.create(sport_id: indoor_football.id, installation_id: sports_center_installation.id),
+    SportsInstallation.create(sport_id: football_seven_a_side.id, installation_id: football_stadium.id),
+    SportsInstallation.create(sport_id: football.id, installation_id: football_stadium.id),
+    SportsInstallation.create(sport_id: basketball.id, installation_id: basketball_outdoor.id),
+    SportsInstallation.create(sport_id: basketball.id, installation_id: sports_center_installation.id)
+]
 
 
-def mock_time_band(month, days)
+def mock_time_band(month, days, sports_installations)
   days.times do |day|
     8.times do |hour|
-      TimeBand.create(start_hour: "#{8 + (hour % 2 == 0 ? (hour / 2) + hour : (hour / 3) + hour)}:#{hour % 2 == 0 ? '00' : '30'}", date: Date.new(2016, month, day + 1), end_hour: "#{9 + (hour % 2 == 0 ? (hour / 2) + hour : hour + ((hour + 1)/2))}:#{hour % 2== 0 ? '30' : '00'}")
+      TimeBand.create(start_hour: "#{8 + (hour % 2 == 0 ? (hour / 2) + hour : (hour / 3) + hour)}:#{hour % 2 == 0 ? '00' : '30'}", date: Date.new(2016, month, day + 1), end_hour: "#{9 + (hour % 2 == 0 ? (hour / 2) + hour : hour + ((hour + 1)/2))}:#{hour % 2== 0 ? '30' : '00'}", sports_installations: sports_installations)
     end
   end
 end
 
-mock_time_band(7, 31) # July Timebands
+mock_time_band(7, 31, sports_installations) # July Timebands
 
