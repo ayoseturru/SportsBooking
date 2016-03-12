@@ -10,7 +10,12 @@
 </head>
 <body>
 
-<%= yield %>
+
+<%= render 'layouts/navbar' %>
+
+<div class="my_container">
+  <%= yield %>
+</div>
 
 <%= render "layouts/modals" %>
 </body>

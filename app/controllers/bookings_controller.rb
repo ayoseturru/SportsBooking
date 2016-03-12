@@ -1,3 +1,4 @@
+require 'date'
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :edit, :update, :destroy]
 
@@ -15,10 +16,43 @@ class BookingsController < ApplicationController
   # GET /bookings/new
   def new
     @booking = Booking.new
+    @sports = Sport.all
   end
 
   # GET /bookings/1/edit
   def edit
+  end
+
+  def installation_options
+    @installations = Sport.find_by_id(params[:sport_id]).installations
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def free_hours_table
+    new_booking_params = filter_booking_params
+    if new_booking_params
+      @time_bands = SportsInstallation.where(installation_id: params[:installation_id], sport_id: params[:sport_id]).first.time_bands.where(date: Date.new(new_booking_params[:year], new_booking_params[:month], new_booking_params[:day]))
+      respond_to do |format|
+        format.js
+      end
+    end
+  end
+
+  protected
+  def filter_booking_params
+    return !new_booking_params_sended? ? false : new_booking_filter_params
+  end
+
+  protected
+  def new_booking_filter_params
+    return {day: params[:date].split(",")[0].split(" ")[0].to_i, month: Date::MONTHNAMES.index(params[:date].split(",")[0].split(" ")[1]).to_i, year: params[:date].split(",")[1].to_i}
+  end
+
+  protected
+  def new_booking_params_sended?
+    return (params[:date] and params[:sport_id] and params[:installation_id]) ? true : false
   end
 
   # POST /bookings

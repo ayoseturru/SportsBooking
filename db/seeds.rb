@@ -29,7 +29,7 @@ def mock_time_band(month, days, sports_installations)
   end
 end
 
-mock_time_band(7, 31, sports_installations) # July Timebands
+mock_time_band(Time.now.month, Time.days_in_month(Time.now.month, Time.now.year), sports_installations) # March Timebands
 
 # Example of how to create a booking
 Booking.create(sports_installation_id: sports_installations.first.id, time_band_id: TimeBand.first.id)

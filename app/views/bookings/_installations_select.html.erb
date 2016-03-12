@@ -1,0 +1,11 @@
+<div class="installation input-field col s12">
+  <%= select_tag "installation", options_from_collection_for_select(@installations, "id", "name"), include_blank: true, prompt: "Choose a installation", required: "true" %>
+  <label>Installation</label>
+</div>
+
+<script !src="">
+  $("#installation").on("change", function () {
+    $("#free_hours_table").html("");
+    $("#date").val("");
+  });
+</script>

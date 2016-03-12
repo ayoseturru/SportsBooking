@@ -1,25 +1,102 @@
-<%= form_for(@booking) do |f| %>
-  <% if @booking.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@booking.errors.count, "error") %> prohibited this booking from being saved:</h2>
+<% if false %>
+    <%= form_for(@booking) do |f| %>
+        <% if @booking.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@booking.errors.count, "error") %> prohibited this booking from being saved:</h2>
 
-      <ul>
-      <% @booking.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+              <ul>
+                <% @booking.errors.full_messages.each do |message| %>
+                    <li>
+                      <% message %></li>
+                <% end %>
+              </ul>
+            </div>
+        <% end %>
 
-  <div class="field">
-    <%= f.label :sports_installation %><br>
-    <%= f.number_field :sports_installation %>
-  </div>
-  <div class="field">
-    <%= f.label :time_band %><br>
-    <%= f.number_field :time_band %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+        <div class="field">
+          <%= f.label :sports_installation %><br>
+          <%= f.number_field :sports_installation %>
+        </div>
+        <div class="field">
+          <%= f.label :time_band %><br>
+          <%= f.number_field :time_band %>
+        </div>
+        <div class="actions">
+          <%= f.submit %>
+        </div>
+    <% end %>
 <% end %>
+
+<%= form_tag bookings_path method: :post do %>
+
+    <div class="input-field col s3">
+      <%= select_tag "sport", options_from_collection_for_select(@sports, "id", "name"), include_blank: true, prompt: "Choose a sport", required: "true" %>
+      <label>Sport</label>
+    </div>
+
+    <br>
+
+    <div class="installation input-field col s3">
+      <%= select_tag "installation", options_from_collection_for_select(Installation.all, "id", "name"), include_blank: true, prompt: "Choose a installation", required: "true" %>
+      <label>Installation</label>
+    </div>
+
+    <br>
+
+    <div class="input-field col s3">
+      <input id="date" type="date" class="datepicker" required>
+      <label for="date">Date</label>
+    </div>
+
+    <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+      <i class="material-icons right">send</i>
+    </button>
+
+    <input type="hidden" id="time_band_id" required>
+<% end %>
+
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function () {
+    $('select').material_select();
+
+    $("#sport").on("change", function () {
+      if ($('#sport').children(":selected").attr("value")) {
+        $.ajax({
+          url: "/bookings/installation_options",
+          method: "GET",
+          data: {
+            sport_id: $('#sport').children(":selected").attr("value")
+          }
+        });
+      }
+    });
+
+    $('.datepicker').pickadate({
+      selectMonths: false, // Creates a dropdown to control month
+      selectYears: false // Creates a dropdown of 15 years to control year
+    });
+
+    function free_hours_request() {
+      $.ajax({
+        url: "/bookings/free_hours_table",
+        type: "GET",
+        data: {
+          date: $("#date").val(),
+          sport_id: $('#sport').children(":selected").attr("value"),
+          installation_id: $('#installation').children(":selected").attr("value")
+        }
+      });
+    }
+
+    $("#date").on("change", function () {
+      if ($('#installation').children(":selected").attr("value") && $('#sport').children(":selected").attr("value")) {
+        free_hours_request();
+      }
+    });
+
+    $("#sport").on("change", function () {
+      $("#free_hours_table").html("");
+      $("#date").val("");
+    });
+  });
+</script>
