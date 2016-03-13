@@ -14,20 +14,19 @@
       <td><%= time_band.start_hour %></td>
       <td><%= time_band.end_hour %></td>
       <td>15 €</td>
-      <% if SportsInstallationsTimeBand.find_by_time_band_id(time_band.id).free %>
+      <% if SportsInstallationsTimeBand.where(sports_installation_id: @sports_installation.id, time_band_id: time_band.id).first.free %>
           <td>
             <%= link_to "javascript:void(0)", id: time_band.id, class: "waves-effect waves-light btn add_booking" do %>
                 <i class="material-icons left">library_add</i>
-                <span>Book</span>
+                <span>Free</span>
             <% end %>
           </td>
       <% else %>
-          <td class="red lighten-2">Booked</td>
+          <td><a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">lock</i></a></td>
       <% end %>
   <% end %>
   </tbody>
 </table>
-</div>
 
 <script !src="">
   $(".add_booking").on("click", function () {
@@ -37,15 +36,17 @@
       $("#" + $(this).attr("id") + " i").html("done");
       $("#" + $(this).attr("id") + " span").html("ok");
       $(".selected_book i").html("library_add");
-      $(".selected_book span").html("book");
+      $(".selected_book span").html("free");
       $(".selected_book").removeClass("selected_book");
       $(this).addClass("selected_book");
     } else if ($("#" + $(this).attr("id") + " i").html() == "done") {
       $("#time_band_id").val("");
       $("#" + $(this).attr("id") + " i").html("library_add");
-      $("#" + $(this).attr("id") + " span").html("book");
+      $("#" + $(this).attr("id") + " span").html("free");
       $(this).removeClass("selected_book")
     }
 
   });
 </script>
+
+</div>

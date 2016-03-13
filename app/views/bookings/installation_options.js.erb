@@ -1,2 +1,6 @@
 $(".installation").replaceWith("<%= j render "installations_select" %>");
 $('select').material_select();
+$("#installation").on("change", function() {
+  $("#free_hours_table").html("");
+  $("#date").val("");
+});

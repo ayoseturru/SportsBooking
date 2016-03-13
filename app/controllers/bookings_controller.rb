@@ -2,77 +2,35 @@ require 'date'
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :edit, :update, :destroy]
 
-  # GET /bookings
-  # GET /bookings.json
   def index
     @bookings = Booking.all
   end
 
-  # GET /bookings/1
-  # GET /bookings/1.json
   def show
   end
 
-  # GET /bookings/new
   def new
     @booking = Booking.new
     @sports = Sport.all
   end
 
-  # GET /bookings/1/edit
   def edit
   end
 
-  def installation_options
-    @installations = Sport.find_by_id(params[:sport_id]).installations
-    respond_to do |format|
-      format.js
-    end
-  end
-
-  def free_hours_table
-    new_booking_params = filter_booking_params
-    if new_booking_params
-      @time_bands = SportsInstallation.where(installation_id: params[:installation_id], sport_id: params[:sport_id]).first.time_bands.where(date: Date.new(new_booking_params[:year], new_booking_params[:month], new_booking_params[:day]))
-      respond_to do |format|
-        format.js
-      end
-    end
-  end
-
-  protected
-  def filter_booking_params
-    return !new_booking_params_sended? ? false : new_booking_filter_params
-  end
-
-  protected
-  def new_booking_filter_params
-    return {day: params[:date].split(",")[0].split(" ")[0].to_i, month: Date::MONTHNAMES.index(params[:date].split(",")[0].split(" ")[1]).to_i, year: params[:date].split(",")[1].to_i}
-  end
-
-  protected
-  def new_booking_params_sended?
-    return (params[:date] and params[:sport_id] and params[:installation_id]) ? true : false
-  end
-
-  # POST /bookings
-  # POST /bookings.json
   def create
-    @booking = Booking.new(booking_params)
-
-    respond_to do |format|
+    if new_booking_params_sended?
+      sport_installation = SportsInstallation.where(sport_id: params[:sport], installation_id: params[:installation]).first
+      @booking = Booking.new(sports_installation_id: sport_installation.id, time_band_id: params[:time_band_id])
       if @booking.save
-        format.html { redirect_to @booking, notice: 'Booking was successfully created.' }
-        format.json { render :show, status: :created, location: @booking }
+        redirect_to bookings_path, notice: "Ok"
       else
-        format.html { render :new }
-        format.json { render json: @booking.errors, status: :unprocessable_entity }
+        redirect_to :new
       end
+    else
+      redirect_to new_booking_path, alert: "Make you sure you have selected a sport, a installation and a time band..."
     end
   end
 
-  # PATCH/PUT /bookings/1
-  # PATCH/PUT /bookings/1.json
   def update
     respond_to do |format|
       if @booking.update(booking_params)
@@ -85,8 +43,6 @@ class BookingsController < ApplicationController
     end
   end
 
-  # DELETE /bookings/1
-  # DELETE /bookings/1.json
   def destroy
     @booking.destroy
     respond_to do |format|
@@ -95,13 +51,39 @@ class BookingsController < ApplicationController
     end
   end
 
+  def installation_options
+    @installations = Sport.find_by_id(params[:sport_id]).installations
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def free_hours_table
+    date = extract_date_from_params
+    @time_bands = SportsInstallation.where(installation_id: params[:installation_id], sport_id: params[:sport_id]).first.time_bands.where(date: Date.new(date[:year], date[:month], date[:day]))
+    @sports_installation = SportsInstallation.where(installation_id: params[:installation_id], sport_id: params[:sport_id]).first
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  protected
+  def extract_date_from_params
+    return {day: params[:date].split(",")[0].split(" ")[0].to_i, month: Date::MONTHNAMES.index(params[:date].split(",")[0].split(" ")[1]).to_i, year: params[:date].split(",")[1].to_i}
+  end
+
+  protected
+  def new_booking_params_sended?
+    return (params[:date] and params[:sport] and params[:installation] and params[:time_band_id]) ? true : false
+    # code here
+  end
+
+
   private
-  # Use callbacks to share common setup or constraints between actions.
   def set_booking
     @booking = Booking.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
   def booking_params
     params.require(:booking).permit(:sports_installation, :time_band)
   end
