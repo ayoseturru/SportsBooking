@@ -1,4 +1,4 @@
-<h2>Books Table</h2>
+<h4>Time Bands <i class="material-icons">av_timer</i></h4>
 <table class="striped highlight centered responsive-table">
   <thead class="">
   <tr>
@@ -9,14 +9,14 @@
   </tr>
   </thead>
 
-  <tbody class="lighten-3">
+  <tbody>
   <%= content_tag_for(:tr, @time_bands) do |time_band| %>
       <td><%= time_band.start_hour %></td>
       <td><%= time_band.end_hour %></td>
       <td>15 €</td>
       <% if SportsInstallationsTimeBand.where(sports_installation_id: @sports_installation.id, time_band_id: time_band.id).first.free %>
           <td>
-            <%= link_to "javascript:void(0)", id: time_band.id, class: "waves-effect waves-light btn add_booking" do %>
+            <%= link_to "javascript:void(0)", id: time_band.id, class: "btn-floating btn-large waves-effect waves-light add_booking" do %>
                 <i class="material-icons left">library_add</i>
                 <span>Free</span>
             <% end %>

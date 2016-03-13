@@ -45,21 +45,16 @@
     </div>
 
     <div class="row">
-      <div class="input-field col s5">
+      <div class="input-field col s12 m5">
         <input name="date" id="date" type="date" class="datepicker" required>
         <label for="date">Date</label>
+        <button class="col s2 btn waves-effect waves-light" type="submit" name="action">Book!
+          <i class="material-icons right">send</i>
+        </button>
+      </div>
+      <div class="col s12 col m7" id="free_hours_table">
       </div>
     </div>
-
-    <div id="free_hours_table">
-
-    </div>
-
-    <br>
-
-    <button class="btn waves-effect waves-light" type="submit" name="action">Book!
-      <i class="material-icons right">send</i>
-    </button>
 
     <input type="hidden" id="time_band_id" name="time_band_id">
 <% end %>

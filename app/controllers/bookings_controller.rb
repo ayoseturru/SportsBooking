@@ -22,7 +22,7 @@ class BookingsController < ApplicationController
       sport_installation = SportsInstallation.where(sport_id: params[:sport], installation_id: params[:installation]).first
       @booking = Booking.new(sports_installation_id: sport_installation.id, time_band_id: params[:time_band_id])
       if @booking.save
-        redirect_to bookings_path, notice: "Ok"
+        redirect_to bookings_path, notice: "Booking was successfully created"
       else
         redirect_to :new
       end
