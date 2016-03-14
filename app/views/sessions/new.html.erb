@@ -1,0 +1,33 @@
+<div id="login-page " class="row mt-120">
+  <div class="offset-s4 col s4  card-panel">
+  <%= form_tag session_path do %>
+      <div class="row">
+        <div class="input-field col s12 center">
+          <p class="center login-form-text">Alquiler Canchas</p>
+        </div>
+
+        <div class="row margin">
+          <div class="input-field col s12">
+            <%= text_field_tag :dni %>
+            <%= label_tag 'dni', :dni, data: {success:'right'}, class: "center-align" %>
+          </div>
+        </div>
+
+        <div class="row margin">
+          <div class="input-field col s12">
+            <%= password_field_tag :password %>
+            <label for="password">Password</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12">
+            <input type="submit" class="btn waves-effect blue lighten-2 col s12" name="name" value="Login">
+          </div>
+        </div>
+
+      </div>
+
+  <% end %>
+  </div>
+</div>
