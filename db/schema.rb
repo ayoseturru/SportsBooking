@@ -16,8 +16,8 @@ ActiveRecord::Schema.define(version: 20160312102825) do
   create_table "bookings", force: :cascade do |t|
     t.integer  "sports_installation_id"
     t.integer  "time_band_id"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "installations", force: :cascade do |t|

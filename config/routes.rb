@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root 'bookings#new'
-
+  resource :session, only: [:new, :create, :destroy]
   resources :teams
   resources :users
 
