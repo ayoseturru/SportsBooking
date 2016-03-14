@@ -1,8 +1,9 @@
+require 'digest'
 class User < ActiveRecord::Base
   has_many :bookings, dependent: :destroy
   has_many :teams
 
-  def self.authenticate(dni,password)
+  def self.authenticate(dni, password)
     user = find_by_dni(dni)
     return user if user && user.authenticated?(password)
   end

@@ -1,6 +1,7 @@
 require 'date'
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate
 
   def index
     @bookings = Booking.all
@@ -67,19 +68,14 @@ class BookingsController < ApplicationController
     end
   end
 
-  protected
   def extract_date_from_params
     return {day: params[:date].split(",")[0].split(" ")[0].to_i, month: Date::MONTHNAMES.index(params[:date].split(",")[0].split(" ")[1]).to_i, year: params[:date].split(",")[1].to_i}
   end
 
-  protected
   def new_booking_params_sended?
     return (params[:date] and params[:sport] and params[:installation] and params[:time_band_id]) ? true : false
-    # code here
   end
 
-
-  private
   def set_booking
     @booking = Booking.find(params[:id])
   end
@@ -87,4 +83,7 @@ class BookingsController < ApplicationController
   def booking_params
     params.require(:booking).permit(:sports_installation, :time_band)
   end
+
+  protected :extract_date_from_params, :new_booking_params_sended?
+  private :set_booking
 end

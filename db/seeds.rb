@@ -1,13 +1,14 @@
 require 'date'
+require 'digest'
 
 sports_center_installation = Installation.create(name: "Sports Center", address: "Campus Universitario de Tafira")
 outdoor_football_installation = Installation.create(name: "Outdoor Court", address: "Campus Universitario de Tafira")
 football_stadium = Installation.create(name: "ULPGC Football Stadium", address: "Campus Universitario de Tafira")
 basketball_outdoor= Installation.create(name: "Basketball Outdoor Court", address: "Campus Universitario de Tafira")
 
-indoor_football = Sport.create(name: "Indoor Football", max_players: 10, installations: [sports_center_installation, outdoor_football_installation])
-football_seven_a_side = Sport.create(name: "Footabll Seve-a-side", max_players: 14, installations: [football_stadium])
-football = Sport.create(name: "Footabll", max_players: 22, installations: [football_stadium])
+indoor_football = Sport.create(name: "Futsal", max_players: 10, installations: [sports_center_installation, outdoor_football_installation])
+football_seven_a_side = Sport.create(name: "Football Seven-a-side", max_players: 14, installations: [football_stadium])
+football = Sport.create(name: "Football", max_players: 22, installations: [football_stadium])
 basketball = Sport.create(name: "Basketball", max_players: 10, installations: [sports_center_installation, basketball_outdoor])
 
 
@@ -33,3 +34,5 @@ mock_time_band(Time.now.month, Time.days_in_month(Time.now.month, Time.now.year)
 
 # Example of how to create a booking
 Booking.create(sports_installation_id: sports_installations.first.id, time_band_id: TimeBand.first.id)
+
+User.create(dni: "12345678", password: Digest::SHA1.hexdigest("12345678"))

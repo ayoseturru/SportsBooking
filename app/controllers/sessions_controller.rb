@@ -2,14 +2,14 @@ class SessionsController < ApplicationController
   def create
     if user=User.authenticate(params[:dni], params[:password])
       session[:user_id] =user.id
-      redirect_to root_path, notice:"login Correcto"
+      redirect_to bookings_path, notice:"Login successfully"
     else
-      flash.now[:alert] = "Parametros incorrectos"
+      flash.now[:alert] = "Invalid credentials"
       render action: :new
     end
   end
   def destroy
     reset_session
-    redirect_to root_path, notice: "Te has logueado correctamente"
+    redirect_to root_path, notice: "Logout successfully"
   end
 end
