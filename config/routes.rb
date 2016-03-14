@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
   root 'sessions#new'
+
   resource :session, only: [:new, :create, :destroy]
-  resources :teams
+
+  resources :teams do
+    collection do
+      put "add_player"
+    end
+  end
+
   resources :users
 
   resources :bookings do

@@ -1,29 +1,44 @@
 <%= form_for(@team) do |f| %>
-  <% if @team.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@team.errors.count, "error") %> prohibited this team from being saved:</h2>
+    <% if @team.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@team.errors.count, "error") %> prohibited this team from being saved:</h2>
 
-      <ul>
-      <% @team.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @team.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :user_id %><br>
+      <%= f.number_field :user_id %>
     </div>
-  <% end %>
+    <div class="field">
+      <%= f.label :name %><br>
+      <%= f.text_field :name %>
+    </div>
+    <div class="field input-field col s12">
+      <%= select("sport", "sport_id", Sport.all.collect { |sport| [sport.name, sport.id] }, {include_blank: true}) %>
+      <label for="Sport">Sport</label>
+    </div>
 
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.number_field :user_id %>
-  </div>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.number_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :sport %><br>
-    <%= f.text_field :sport %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Add Player</a>
+    <br><br>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
 <% end %>
+
+
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <h4>Add Player</h4>
+    <%= text_field_tag 'playerName', nil, placeholder: 'Player Name', :required => true %>
+  </div>
+  <div class="modal-footer">
+    <%= link_to 'Add player', add_player_teams_path, class: "modal-action modal-close waves-effect waves-green btn-flat", remote: true, method: :put %>
+    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+  </div>
+</div>

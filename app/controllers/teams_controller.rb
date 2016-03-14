@@ -21,6 +21,12 @@ class TeamsController < ApplicationController
   def edit
   end
 
+  def add_player
+    respond_to do |format|
+      format.js
+    end
+  end
+
   # POST /teams
   # POST /teams.json
   def create
@@ -62,13 +68,13 @@ class TeamsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_team
-      @team = Team.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_team
+    @team = Team.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def team_params
-      params.require(:team).permit(:user_id, :name, :sport)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def team_params
+    params.require(:team).permit(:user_id, :name, :sport)
+  end
 end
