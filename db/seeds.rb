@@ -35,4 +35,8 @@ mock_time_band(Time.now.month, Time.days_in_month(Time.now.month, Time.now.year)
 # Example of how to create a booking
 Booking.create(sports_installation_id: sports_installations.first.id, time_band_id: TimeBand.first.id)
 
-User.create(dni: "12345678", password: Digest::SHA1.hexdigest("12345678"))
+test_user = User.create(dni: "test", password: Digest::SHA1.hexdigest("12345678"))
+test1_user = User.create(dni: "test1", password: Digest::SHA1.hexdigest("12345678"))
+
+Team.create(name: "test", user: test_user)
+Team.create(name: "test1", user: test1_user)
