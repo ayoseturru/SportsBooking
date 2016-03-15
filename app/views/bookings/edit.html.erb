@@ -2,5 +2,19 @@
 
 <%= render 'form' %>
 
+
+<% if @booking.local_team != -1 || @booking.away_team != -1  %>
+    <%= link_to 'Remove team from booking', delete_team_from_booking_bookings_path(id: @booking.id), method: :post, class: "col s2 btn red waves-effect waves-light",data: { confirm: 'Are you sure?' }%>
+<% end %>
+<p>
+  <strong>Local Team Id</strong>
+  <%= @booking.away_team %>
+</p>
+
+<p>
+  <strong>Away Team Id</strong>
+  <%= @booking.local_team %>
+</p>
+
 <%= link_to 'Show', @booking %> |
 <%= link_to 'Back', bookings_path %>

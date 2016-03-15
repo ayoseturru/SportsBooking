@@ -21,7 +21,7 @@ class BookingsController < ApplicationController
   def create
     if new_booking_params_sended?
       sport_installation = SportsInstallation.where(sport_id: params[:sport], installation_id: params[:installation]).first
-      @booking = Booking.new(sports_installation_id: sport_installation.id, time_band_id: params[:time_band_id])
+      @booking = Booking.new(sports_installation_id: sport_installation.id, time_band_id: params[:time_band_id], away_team: -1, local_team: -1)
       if @booking.save
         redirect_to bookings_path, notice: "Booking was successfully created"
       else
@@ -78,6 +78,25 @@ class BookingsController < ApplicationController
 
   def set_booking
     @booking = Booking.find(params[:id])
+  end
+
+  def delete_team_from_booking
+    #If current_user.id == User.find_by_id(@booking.local_team)
+    #    @booking.destroy
+    #    respond_to do |format|
+    #    format.html { redirect_to bookings_url, notice: 'Booking was  destroyed.' }
+    #   format.json { head :no_content }
+    #elseif current_user.id == User.find_by_id(@booking.away_team)
+    #@booking.update(away_team: -1)
+    #respond_to do |format|
+    #format.html { redirect_to bookings_url, notice: 'Your team was succesfully destroyed.' }
+    #format.json { head :no_content }  */
+
+    @booking.update(local_team: -1)
+    respond_to do |format|
+      format.html { redirect_to root_path, notice: 'Local team removed.' }
+      format.json { head :no_content }
+    end
   end
 
   def booking_params

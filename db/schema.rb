@@ -11,13 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160312102825) do
+ActiveRecord::Schema.define(version: 20160315002809) do
 
   create_table "bookings", force: :cascade do |t|
     t.integer  "sports_installation_id"
     t.integer  "time_band_id"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.integer  "local_team"
+    t.integer  "away_team"
   end
 
   create_table "installations", force: :cascade do |t|
