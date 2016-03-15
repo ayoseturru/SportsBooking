@@ -1,6 +1,8 @@
+<div class="container">
+  <div class="row">
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Bookings</h1>
+<h1 class="center-align">Listing Bookings</h1>
 
 <table>
   <thead>
@@ -16,14 +18,16 @@
       <tr>
         <td><%= booking.sports_installation %></td>
         <td><%= booking.time_band %></td>
-        <td><%= link_to 'Show', booking %></td>
-        <td><%= link_to 'Edit', edit_booking_path(booking) %></td>
-        <td><%= link_to 'Destroy', booking, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', booking, class: "btn blue lighten-2"%></td>
+        <td><%= link_to 'Edit', edit_booking_path(booking) , class: "btn blue lighten-2"%></td>
+        <td><%= link_to 'Destroy', booking, method: :delete, data: { confirm: 'Are you sure?' },  class: "btn red darken-1" %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
+  </div>
 <br>
 
-<%= link_to 'New Booking', new_booking_path %>
+<%= link_to 'New Booking', new_booking_path, class:"btn light-blue darken-1"%>
+
+</div>

@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+
   def create
     if user=User.authenticate(params[:dni], params[:password])
       session[:user_id] =user.id
@@ -8,8 +9,9 @@ class SessionsController < ApplicationController
       render action: :new
     end
   end
+
   def destroy
     reset_session
-    redirect_to root_path, notice: "Logout successfully"
+    redirect_to action: :new, notice: "Logout successfully"
   end
 end

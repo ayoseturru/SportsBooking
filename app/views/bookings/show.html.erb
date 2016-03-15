@@ -1,14 +1,24 @@
+<div class="container">
+  <div class="row col s6">
 <p id="notice"><%= notice %></p>
-
+<div class="col s12 valign-wrapper mt-30">
+  <div class="col s4">
 <p>
   <strong>Sports installation:</strong>
   <%= @booking.sports_installation %>
 </p>
-
+  </div>
+ <div class="col s4">
 <p>
   <strong>Time band:</strong>
   <%= @booking.time_band %>
 </p>
+ </div>
 
-<%= link_to 'Edit', edit_booking_path(@booking) %> |
-<%= link_to 'Back', bookings_path %>
+    <div class="col s4 valign">
+<%= link_to 'Edit', edit_booking_path(@booking), class: "btn blue lighten-2" %>
+<%= link_to 'Back', bookings_path, class: "btn blue lighten-2" %>
+    </div>
+</div>
+  </div>
+</div>
