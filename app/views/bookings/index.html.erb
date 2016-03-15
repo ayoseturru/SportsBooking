@@ -16,7 +16,7 @@
       <tr>
         <td><%= booking.sports_installation %></td>
         <td><%= booking.time_band %></td>
-        <td><%= link_to 'Show', booking %></td>
+        <td><%= link_to 'Show', booking_path(booking) %></td>
         <td><%= link_to 'Edit', edit_booking_path(booking) %></td>
         <td><%= link_to 'Destroy', booking, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

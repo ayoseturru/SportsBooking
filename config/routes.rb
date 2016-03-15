@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     collection do
       get 'installation_options'
       get 'free_hours_table'
+      post 'delete_team_from_booking'
     end
   end
 

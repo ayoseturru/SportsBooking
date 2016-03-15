@@ -33,3 +33,7 @@ mock_time_band(Time.now.month, Time.days_in_month(Time.now.month, Time.now.year)
 
 # Example of how to create a booking
 Booking.create(sports_installation_id: sports_installations.first.id, time_band_id: TimeBand.first.id)
+Team.create(name: "myTeam", user: User.new(name: "matthew@gmail.com", dni: "1234", password: "12234568"))
+Team.create(name: "myTeam2", user: User.new(name: "matthew2@gmail.com",dni: "1234", password: "12234568"))
+
+

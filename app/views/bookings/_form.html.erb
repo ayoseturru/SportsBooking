@@ -29,6 +29,7 @@
 
 <%= form_tag bookings_path do %>
 
+    <% !if params[:action] == "Edit"%>
     <div class="col s12">
       <div class="row">
         <div class="row">
@@ -43,6 +44,7 @@
         </div>
       </div>
     </div>
+        <% end %>
 
     <div class="row">
       <div class="input-field col s12 m5">
@@ -62,7 +64,6 @@
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function () {
     $('select').material_select();
-
     $("#sport").on("change", function () {
       if ($('#sport').children(":selected").attr("value")) {
         $.ajax({
