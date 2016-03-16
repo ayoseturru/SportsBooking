@@ -28,33 +28,19 @@
 <% end %>
 
 <% !if params[:action] == "Edit"%>
-
     <div class="col s12">
-
       <div class="row">
-
         <div class="row">
-
           <div class="input-field col s6">
-
             <%= select_tag "sport", options_from_collection_for_select(@sports, "id", "name"), include_blank: true, prompt: "Choose a sport", required: true %>
-
             <label for="sport">Sport</label>
-
           </div>
-
           <div class="input-field col s6 installation">
-
             <%= select_tag "installation", options_from_collection_for_select(Installation.all, "id", "name"), class: "installation", include_blank: true, prompt: "Choose a installation", required: true %>
-
             <label for="installation">Installation</label>
-
           </div>
-
         </div>
-
       </div>
-
     </div>
 <% end %>
 
