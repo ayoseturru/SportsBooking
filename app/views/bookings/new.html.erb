@@ -1,6 +1,13 @@
 <div class="container mt-30">
-<h1 class="center-align">New Booking</h1>
 
-<%= render 'form' %>
+  <% if params[:action] == "new" %>
+      <h1 class="center-align">New Booking</h1>
+  <% else %>
+      <h1 class="center-align">New Team Booking</h1>
+  <% end %>
+
+  <%= render 'form' %>
 
 </div>
+
+

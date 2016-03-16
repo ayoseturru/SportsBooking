@@ -15,6 +15,9 @@ Rails.application.routes.draw do
     collection do
       get 'installation_options'
       get 'free_hours_table'
+      get 'new_team'
+      post 'create_team'
+      get 'set_team_id'
     end
   end
 

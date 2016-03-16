@@ -2,7 +2,7 @@ class Booking < ActiveRecord::Base
   belongs_to :user
   belongs_to :sports_installation
   belongs_to :time_band
-  before_save :book_time_band
+  before_save :book_time_band, :set_teams
   before_destroy :free_time_band
 
   def free_time_band
@@ -13,5 +13,10 @@ class Booking < ActiveRecord::Base
     SportsInstallationsTimeBand.where(time_band_id: self.time_band_id, sports_installation_id: self.sports_installation_id).first.update(free: false)
   end
 
-  private :free_time_band, :book_time_band
+  def set_teams
+    self.local_team ||= -1
+    self.away_team ||= -1
+  end
+
+  private :free_time_band, :book_time_band, :set_teams
 end

@@ -4,7 +4,7 @@ class BookingsController < ApplicationController
   before_action :authenticate
 
   def index
-    @bookings = Booking.all
+    @bookings = current_user.bookings
   end
 
   def show
@@ -15,13 +15,19 @@ class BookingsController < ApplicationController
     @sports = Sport.all
   end
 
+  def new_team
+    @booking = Booking.new
+    @sports = Sport.all
+    render :new
+  end
+
   def edit
   end
 
   def create
     if new_booking_params_sended?
       sport_installation = SportsInstallation.where(sport_id: params[:sport], installation_id: params[:installation]).first
-      @booking = Booking.new(sports_installation_id: sport_installation.id, time_band_id: params[:time_band_id])
+      @booking = current_user.bookings.new(sports_installation_id: sport_installation.id, time_band_id: params[:time_band_id])
       if @booking.save
         redirect_to bookings_path, notice: "Booking was successfully created"
       else
@@ -44,6 +50,26 @@ class BookingsController < ApplicationController
     end
   end
 
+  def create_team
+    if new_team_booking_params_sended?
+      sport_installation = SportsInstallation.where(sport_id: params[:sport], installation_id: params[:installation]).first
+      @booking = current_user.bookings.new(sports_installation_id: sport_installation.id, time_band_id: params[:time_band_id], local_team: params[:team_id])
+      if @booking.save
+        redirect_to bookings_path, notice: "Team Booking was successfully created"
+      else
+        redirect_to :new
+      end
+    else
+      redirect_to new_team_bookings_path, alert: "Make you sure you have selected a sport, a installation, a team and a time band..."
+    end
+  end
+
+  def set_team_id
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def destroy
     @booking.destroy
     respond_to do |format|
@@ -60,8 +86,7 @@ class BookingsController < ApplicationController
   end
 
   def free_hours_table
-    date = extract_date_from_params
-    @time_bands = SportsInstallation.where(installation_id: params[:installation_id], sport_id: params[:sport_id]).first.time_bands.where(date: Date.new(date[:year], date[:month], date[:day]))
+    @time_bands = SportsInstallation.where(installation_id: params[:installation_id], sport_id: params[:sport_id]).first.time_bands.where(date: extract_date_from_params)
     @sports_installation = SportsInstallation.where(installation_id: params[:installation_id], sport_id: params[:sport_id]).first
     respond_to do |format|
       format.js
@@ -69,11 +94,15 @@ class BookingsController < ApplicationController
   end
 
   def extract_date_from_params
-    return {day: params[:date].split(",")[0].split(" ")[0].to_i, month: Date::MONTHNAMES.index(params[:date].split(",")[0].split(" ")[1]).to_i, year: params[:date].split(",")[1].to_i}
+    return Date.new(params[:date].split(",")[1].to_i, Date::MONTHNAMES.index(params[:date].split(",")[0].split(" ")[1]).to_i, params[:date].split(",")[0].split(" ")[0].to_i)
   end
 
   def new_booking_params_sended?
-    return (params[:date] and params[:sport] and params[:installation] and params[:time_band_id]) ? true : false
+    return (params[:date] and params[:sport] != "" and params[:installation] != "" and params[:time_band_id]) ? true : false
+  end
+
+  def new_team_booking_params_sended?
+    return new_booking_params_sended? && (params[:team_id] != "")
   end
 
   def set_booking
@@ -84,6 +113,6 @@ class BookingsController < ApplicationController
     params.require(:booking).permit(:sports_installation, :time_band)
   end
 
-  protected :extract_date_from_params, :new_booking_params_sended?
+  protected :extract_date_from_params, :new_booking_params_sended?, :new_team_booking_params_sended?
   private :set_booking
 end
