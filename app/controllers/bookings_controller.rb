@@ -70,6 +70,10 @@ class BookingsController < ApplicationController
     end
   end
 
+  def join_team_booking
+    @sports = Sport.all
+  end
+
   def destroy
     @booking.destroy
     respond_to do |format|
@@ -91,6 +95,9 @@ class BookingsController < ApplicationController
     respond_to do |format|
       format.js
     end
+  end
+
+  def team_bookings
   end
 
   def extract_date_from_params
