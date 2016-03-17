@@ -5,6 +5,15 @@ class BookingsController < ApplicationController
 
   def index
     @bookings = current_user.bookings
+    @team_bookings = current_user_team_bookings
+  end
+
+  def current_user_team_bookings
+    team_bookings = []
+    current_user.teams.pluck(:id).each do |team_id|
+      team_bookings.concat(Booking.where(away_team: team_id))
+    end
+    return team_bookings
   end
 
   def show
@@ -74,6 +83,15 @@ class BookingsController < ApplicationController
     @sports = Sport.all
   end
 
+  def add_team_to_existing
+    if add_team_to_existing_booking_params_sended?
+      Booking.find(params[:booking_id]).update(away_team: params[:team_id])
+      redirect_to bookings_path, notice: "Your team was successfully added to the booking..."
+    else
+      redirect_to join_team_booking_bookings_path, alert: "Make you sure you have selected a booking and a team..."
+    end
+  end
+
   def destroy
     @booking.destroy
     respond_to do |format|
@@ -98,6 +116,11 @@ class BookingsController < ApplicationController
   end
 
   def team_bookings
+    @sports_installation = SportsInstallation.where(installation_id: params[:installation_id], sport_id: params[:sport_id]).first
+    @team_bookings = Booking.open_team_booking.where(sports_installation: @sports_installation).where.not(user: current_user).date(extract_date_from_params)
+    respond_to do |format|
+      format.js
+    end
   end
 
   def extract_date_from_params
@@ -112,6 +135,10 @@ class BookingsController < ApplicationController
     return new_booking_params_sended? && (params[:team_id] != "")
   end
 
+  def add_team_to_existing_booking_params_sended?
+    params[:booking_id] != "" && params[:team_id] != ""
+  end
+
   def set_booking
     @booking = Booking.find(params[:id])
   end
@@ -120,6 +147,6 @@ class BookingsController < ApplicationController
     params.require(:booking).permit(:sports_installation, :time_band)
   end
 
-  protected :extract_date_from_params, :new_booking_params_sended?, :new_team_booking_params_sended?
+  protected :extract_date_from_params, :new_booking_params_sended?, :new_team_booking_params_sended?, :new_team_booking_params_sended?
   private :set_booking
 end

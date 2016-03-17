@@ -1,0 +1,49 @@
+<h4>Search your rival <i class="material-icons">supervisor_account</i></h4>
+<table class="striped highlight centered responsive-table">
+  <thead class="">
+  <tr>
+    <th data-field="id">Start Hour</th>
+    <th data-field="name">End Hour</th>
+    <th data-field="price">Price</th>
+    <th data-field="price">Local Team</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <%= content_tag_for(:tr, @team_bookings) do |team_booking| %>
+      <td><%= team_booking.start_hour %></td>
+      <td><%= team_booking.end_hour %></td>
+      <td>15 €</td>
+      <td><%= link_to team_booking.local_team_name, Team.find(team_booking.local_team), target: "_blank" %></td>
+      <td>
+        <%= link_to "javascript:void(0)", id: team_booking.id, class: "btn-floating btn-large waves-effect waves-light add_booking" do %>
+            <i class="material-icons left">library_add</i>
+            <span>Free</span>
+        <% end %>
+      </td>
+  <% end %>
+  </tbody>
+</table>
+
+<script !src="">
+  $(".add_booking").on("click", function () {
+
+    if ($("#" + $(this).attr("id") + " i").html() == "library_add") {
+      $("#booking_id").val($(this).attr("id"));
+      $("#" + $(this).attr("id") + " i").html("done");
+      $("#" + $(this).attr("id") + " span").html("ok");
+      $(".selected_book i").html("library_add");
+      $(".selected_book span").html("free");
+      $(".selected_book").removeClass("selected_book");
+      $(this).addClass("selected_book");
+    } else if ($("#" + $(this).attr("id") + " i").html() == "done") {
+      $("#booking_id").val("");
+      $("#" + $(this).attr("id") + " i").html("library_add");
+      $("#" + $(this).attr("id") + " span").html("free");
+      $(this).removeClass("selected_book")
+    }
+
+  });
+</script>
+
+</div>

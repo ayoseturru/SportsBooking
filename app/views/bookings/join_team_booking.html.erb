@@ -1,6 +1,6 @@
 <div class="container mt-30">
   <h1>Join Team Booking</h1>
-  <%= form_tag params[:action] == "new" ? bookings_path : create_team_bookings_path, novalidate: true do %>
+  <%= form_tag add_team_to_existing_bookings_path, novalidate: true do %>
 
       <div class="col s12">
         <div class="row">
@@ -23,17 +23,15 @@
             <button class="col s3 btn waves-effect waves-light" type="submit" name="action">Book!
               <i class="material-icons right">send</i>
             </button>
-            <% if params[:action] == "new_team" %>
-                <button data-target="select_team" class="col s7 offset-s1 waves-effect waves-light btn modal-trigger">Select
-                  your team
-                </button>
-            <% end %>
+            <button data-target="select_team" class="col s7 offset-s1 waves-effect waves-light btn modal-trigger">Select
+              your team
+            </button>
           </div>
-          <div class="col s12 col m7" id="free_hours_table">
+          <div class="col s12 col m7" id="team_bookings_table">
           </div>
         </div>
       </div>
-      <input type="hidden" id="time_band_id" name="time_band_id">
+      <input type="hidden" id="booking_id" name="booking_id">
       <input type="hidden" id="team_id" name="team_id">
   <% end %>
 
@@ -41,7 +39,7 @@
   <div id="select_team" class="modal blue lighten-3">
     <div class="modal-content blue lighten-3">
       <h4>Select your team</h4>
-      <%= select_tag "teams", options_from_collection_for_select(current_user.teams, "id", "name"), prompt: "Choose your team", required: true %>
+      <%= select_tag "teams", options_from_collection_for_select(current_user.teams, "id", "name"), required: true %>
       <label for="teams">My teams</label>
     </div>
     <div class="modal-footer blue lighten-3">
@@ -50,6 +48,7 @@
     </div>
   </div>
 </div>
+
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function () {
 
@@ -71,9 +70,9 @@
       min: new Date()
     });
 
-    function free_hours_request() {
+    function team_booking_request() {
       $.ajax({
-        url: "/bookings/free_hours_table",
+        url: "/bookings/team_bookings",
         type: "GET",
         data: {
           date: $("#date").val(),
@@ -85,12 +84,12 @@
 
     $("#date").on("change", function () {
       if ($('#installation').children(":selected").attr("value") && $('#sport').children(":selected").attr("value")) {
-        free_hours_request();
+        team_booking_request();
       }
     });
 
     function clearDate() {
-      $("#free_hours_table").html("");
+      $("#team_bookings_table").html("");
       $("#date").val("");
     }
 

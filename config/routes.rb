@@ -20,6 +20,8 @@ Rails.application.routes.draw do
       get 'set_team_id'
       get 'join_team_booking'
       get 'team_bookings'
+      get 'team_bookings_table'
+      post 'add_team_to_existing'
     end
   end
 

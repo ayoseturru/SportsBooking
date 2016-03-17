@@ -1,0 +1,6 @@
+<% if @team_bookings.length > 0 %>
+  $("#team_bookings_table").html("<%= j render "team_bookings_table" %>");
+  $('.modal-trigger').leanModal();
+<% else %>
+  $("#team_bookings_table").html("<h3>There is no teams booking for the selected date</h3>");
+<% end %>

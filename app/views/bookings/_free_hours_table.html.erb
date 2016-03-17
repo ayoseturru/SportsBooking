@@ -11,6 +11,7 @@
 
   <tbody>
   <%= content_tag_for(:tr, @time_bands) do |time_band| %>
+      <% (time_band.date == Date.today) && (DateTime.strptime(time_band.start_hour, '%H:%M') < Time.now) ? next : false %>
       <td><%= time_band.start_hour %></td>
       <td><%= time_band.end_hour %></td>
       <td>15 €</td>
