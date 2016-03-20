@@ -22,8 +22,17 @@ class TeamsController < ApplicationController
   end
 
   def add_player
+    @player = User.find_by_dni(params[:dni])
+    #@team.users = @team.users.push @player
+    #CUIDADO ARRIBA
     respond_to do |format|
-      format.js
+      if @player
+        format.js
+      else
+        format.js {
+          render "_player_not_found"
+        }
+      end
     end
   end
 

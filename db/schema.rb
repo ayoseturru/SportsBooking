@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20160316175727) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.integer  "user_id"
-    t.integer   "local_team"
+    t.integer  "local_team"
     t.integer  "away_team"
   end
 

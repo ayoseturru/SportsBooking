@@ -1,1 +1,6 @@
-alert("hola");
+$(document).ready(function(){
+  $('.tooltipped').tooltip({delay: 15});
+});
+
+Materialize.toast('Player added succesfully', 1000, 'rounded');
+$("#players ul").append("<%= j render "add_player" %>");

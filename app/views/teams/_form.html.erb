@@ -24,6 +24,12 @@
       <label for="Sport">Sport</label>
     </div>
 
+    <div id="players">
+      <ul>
+
+      </ul>
+    </div>
+
     <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Add Player</a>
     <br><br>
     <div class="actions">
@@ -35,10 +41,24 @@
 <div id="modal1" class="modal">
   <div class="modal-content">
     <h4>Add Player</h4>
-    <%= text_field_tag 'playerName', nil, placeholder: 'Player Name', :required => true %>
+    <%= text_field_tag 'dni', nil,  id: "dni", placeholder: 'Player DNI', :required => true %>
   </div>
   <div class="modal-footer">
-    <%= link_to 'Add player', add_player_teams_path, class: "modal-action modal-close waves-effect waves-green btn-flat", remote: true, method: :put %>
-    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+    <a href="#!" class="modal-action waves-effect waves-green btn-flat" id="add_player_button">Add</a>
   </div>
 </div>
+
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function () {
+    $("#add_player_button").on("click", function () {
+      $.ajax({
+        type: "PUT",
+        url: "/teams/add_player",
+        data: {
+          dni: $("#dni").val(),
+        }
+      });
+    });
+  });
+</script>
