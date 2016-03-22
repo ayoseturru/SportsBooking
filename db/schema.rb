@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160316175727) do
+ActiveRecord::Schema.define(version: 20160322121229) do
 
   create_table "bookings", force: :cascade do |t|
     t.integer  "sports_installation_id"
@@ -82,5 +82,15 @@ ActiveRecord::Schema.define(version: 20160316175727) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "users_teams", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "team_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "users_teams", ["team_id"], name: "index_users_teams_on_team_id"
+  add_index "users_teams", ["user_id"], name: "index_users_teams_on_user_id"
 
 end

@@ -1,7 +1,8 @@
 require 'digest'
 class User < ActiveRecord::Base
   has_many :bookings, dependent: :destroy
-  has_many :teams
+  has_many :users_teams
+  has_many :teams, :through => :users_teams
 
   def self.authenticate(dni, password)
     user = find_by_dni(dni)
