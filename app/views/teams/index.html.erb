@@ -1,31 +1,78 @@
-<p id="notice"><%= notice %></p>
+<script type="text/javascript">
+  $(document).ready(function () {
 
-<h1>Listing Teams</h1>
+//Check if the current URL contains '#'
+    if (document.URL.indexOf("#") == -1) {
+// Set the URL to whatever it was plus "#".
+      url = document.URL + "#";
+      location = "#";
 
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Name</th>
-      <th>Sport</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+//Reload the page
+      location.reload(true);
 
-  <tbody>
-    <% @teams.each do |team| %>
+    }
+  });
+</script>
+
+<div class="container">
+  <div class="row">
+
+    <h1 class="center-align">Listing Teams</h1>
+
+    <%= link_to 'New Team', new_team_path, class: "btn light-blue darken-1 right" %>
+
+    <table class="collection striped highlight centered responsive-table">
+      <thead>
       <tr>
-        <td><%= team.user_id %></td>
-        <td><%= team.name %></td>
-        <td><%= team.sport %></td>
-        <td><%= link_to 'Show', team %></td>
-        <td><%= link_to 'Edit', edit_team_path(team) %></td>
-        <td><%= link_to 'Destroy', team, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Name</th>
+        <th>Sport</th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+      </thead>
+      <tbody>
 
-<br>
+      <% identifier = 0 %>
+      <% @teams.each do |team| %>
+          <tr>
+            <td><%= team.name %></td>
+            <td><%= team.sport %></td>
+            <td></td>
 
-<%= link_to 'New Team', new_team_path %>
+            <% identifier = identifier + 1 %>
+            <!-- Modal Trigger -->
+            <td><%= "<a class='waves-effect waves-light btn blue lighten-2 modal-trigger' href='#modal#{identifier} '>Show</a>".html_safe %></td>
+
+            <!-- Modal Structure -->
+            <%= "<div id='modal#{identifier}' class='modal'>".html_safe %>
+            <div class="modal-content">
+              <ul class="collection with-header">
+                <li class="collection-header">
+                  <h4>
+                    Captain: <%= team.user.dni %>
+                  </h4>
+                </li>
+                <!-- Team Members  -->
+                <li class="collection-item">Members:</li>
+                <% team.users.each do |s| %>
+                    <li class="collection-item"><%= s.dni %></li>
+                <% end %>
+              </ul>
+            </div>
+            <div class="modal-footer">
+              <a class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+            </div>
+
+            <td><%= link_to 'Edit', edit_team_path(team), class: "btn blue lighten-2" %></td>
+            <% if team.user.id == current_user.id %>
+                <td><%= link_to '<i class="material-icons icon-white ">delete</i>'.html_safe, team, method: :delete, data: {confirm: 'Are you sure?'}, class: "btn red darken-1" %></td>
+            <% else %>
+                <td><%= link_to 'Leave', team, method: :delete, data: {confirm: 'Are you sure?'}, class: "btn red darken-1" %></td>
+            <% end %>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  <br>
+
+</div>

@@ -1,10 +1,21 @@
 class TeamsController < ApplicationController
   before_action :set_team, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate
 
   # GET /teams
   # GET /teams.json
   def index
-    @teams = Team.all
+    array = Array.new
+
+    Team.where(user_id: current_user).each do |f|
+      array << f
+    end
+
+    current_user.teams.each do |f|
+      array << f
+    end
+
+    @teams = array.uniq
   end
 
   # GET /teams/1
@@ -24,6 +35,7 @@ class TeamsController < ApplicationController
   def add_player
     @player = User.find_by_dni(params[:dni])
     #@team.users = @team.users.push @player
+    @team.users = @team.users.push(@player)
     #CUIDADO ARRIBA
     respond_to do |format|
       if @player
@@ -39,16 +51,11 @@ class TeamsController < ApplicationController
   # POST /teams
   # POST /teams.json
   def create
-    @team = Team.new(team_params)
-
-    respond_to do |format|
-      if @team.save
-        format.html { redirect_to @team, notice: 'Team was successfully created.' }
-        format.json { render :show, status: :created, location: @team }
-      else
-        format.html { render :new }
-        format.json { render json: @team.errors, status: :unprocessable_entity }
-      end
+    @team = current_user.teams.new(team_params)
+    if @team.save
+      redirect_to teams_path, notice: "Booking was successfully created"
+    else
+      redirect_to :new
     end
   end
 
