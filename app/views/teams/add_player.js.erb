@@ -4,3 +4,4 @@ $(document).ready(function(){
 
 Materialize.toast('Player added succesfully', 1000, 'rounded');
 $("#players ul").append("<%= j render "add_player" %>");
+$("#players_list").val($("#players_list").val() + "<%= @player.id.to_s %>" + ",");

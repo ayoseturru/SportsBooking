@@ -19,6 +19,9 @@
       <%= f.label :name %><br>
       <%= f.text_field :name %>
     </div>
+    <div>
+      <input type="hidden" name="players-list">
+    </div>
     <div class="field input-field col s12">
       <%= select("sport", "sport_id", Sport.all.collect { |sport| [sport.name, sport.id] }, {include_blank: true}) %>
       <label for="Sport">Sport</label>

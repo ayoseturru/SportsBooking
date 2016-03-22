@@ -23,14 +23,13 @@ class TeamsController < ApplicationController
 
   def add_player
     @player = User.find_by_dni(params[:dni])
-    #@team.users = @team.users.push @player
-    #CUIDADO ARRIBA
+
     respond_to do |format|
       if @player
         format.js
       else
         format.js {
-          render "_player_not_found"
+          render "player_not_found"
         }
       end
     end
@@ -39,7 +38,15 @@ class TeamsController < ApplicationController
   # POST /teams
   # POST /teams.json
   def create
-    @team = Team.new(team_params)
+    players_to_save = []
+
+    params[:players_list].split(",").each do |id|
+      players_to_save.push(User.find(id))
+    end
+
+    @team = current_user.teams.new(team_params)
+    @team.users = players_to_save
+
 
     respond_to do |format|
       if @team.save
@@ -51,6 +58,7 @@ class TeamsController < ApplicationController
       end
     end
   end
+
 
   # PATCH/PUT /teams/1
   # PATCH/PUT /teams/1.json
