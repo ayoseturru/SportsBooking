@@ -35,11 +35,10 @@
       <input type="hidden" id="team_id" name="team_id">
   <% end %>
 
-
   <div id="select_team" class="modal blue lighten-3">
     <div class="modal-content blue lighten-3">
       <h4>Select your team</h4>
-      <%= select_tag "teams", options_from_collection_for_select(current_user.teams, "id", "name"), required: true %>
+      <%= select_tag "teams", options_from_collection_for_select(Team.where(user_id: current_user.id), "id", "name"), required: true %>
       <label for="teams">My teams</label>
     </div>
     <div class="modal-footer blue lighten-3">

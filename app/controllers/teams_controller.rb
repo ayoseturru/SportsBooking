@@ -39,16 +39,15 @@ class TeamsController < ApplicationController
   # POST /teams
   # POST /teams.json
   def create
-    players_to_save = []
+    players_to_save = [@current_user]
 
     params[:players_list].split(",").each do |id|
-      players_to_save.include?(User.find_by_id(id))? next: players_to_save.push(User.find_by_id(id))
+      players_to_save.include?(User.find_by_id(id)) ? next : players_to_save.push(User.find_by_id(id))
     end
 
     @team = current_user.teams.new(team_params)
+    @team.user_id = current_user.id
     @team.users = players_to_save
-    #Rails.logger.debug "#{players_to_save}"
-
 
     respond_to do |format|
       if @team.save
@@ -94,6 +93,6 @@ class TeamsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def team_params
-    params.require(:team).permit(:user_id, :name, :sport)
+    params.require(:team).permit(:user_id, :name, :sport_id)
   end
 end

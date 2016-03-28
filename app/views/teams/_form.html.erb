@@ -24,7 +24,7 @@
           </div>
 
           <div class="input-field">
-            <%= select("team", "sport", Sport.all.collect { |sport| [sport.name, sport.id] }, {include_blank: true}) %>
+            <%= select("team", "sport_id", Sport.all.collect { |sport| [sport.name, sport.id] }, {include_blank: true}) %>
             <label id="sport_label" for="Sport">Sport</label>
           </div>
 
