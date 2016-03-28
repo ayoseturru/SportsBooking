@@ -1,4 +1,4 @@
-$(document).on("pageload", function () {
+$(document).ready(function () {
     $('select').material_select();
     $('.modal-trigger').leanModal();
 });

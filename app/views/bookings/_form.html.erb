@@ -51,7 +51,8 @@
             <i class="material-icons right">send</i>
           </button>
           <% if params[:action] == "new_team" %>
-              <button data-target="select_team" class="col s7 offset-s1 waves-effect waves-light btn modal-trigger">Select your team</button>
+              <a class="col s7 offset-s1 waves-effect waves-light btn modal-trigger" href="#select_team">Select Team</a>
+              <!--<button type="button" data-target="select_team" class="col s7 offset-s1 waves-effect waves-light btn modal-trigger">Select your team</button>-->
           <% end %>
         </div>
         <div class="col s12 col m7" id="free_hours_table">
@@ -78,7 +79,7 @@
 
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function () {
-
+    $('.modal-trigger').leanModal();
     $("#sport").on("change", function () {
       if ($('#sport').children(":selected").attr("value")) {
         $.ajax({

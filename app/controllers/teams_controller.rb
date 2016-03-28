@@ -5,7 +5,17 @@ class TeamsController < ApplicationController
   # GET /teams
   # GET /teams.json
   def index
-    @teams = Team.all
+    @teams = []
+
+    Team.where(user_id: current_user).each do |my_teams_owner|
+      @teams.push my_teams_owner
+    end
+
+    current_user.teams.each do |my_teams_members|
+      @teams.push my_teams_members
+    end
+
+    @teams = current_user.teams
   end
 
   # GET /teams/1
