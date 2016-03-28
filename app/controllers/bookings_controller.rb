@@ -1,7 +1,8 @@
 require 'date'
 class BookingsController < ApplicationController
-  before_action :set_booking, only: [:show, :edit, :update, :destroy]
+  before_action :set_booking, only: [:show, :edit, :update, :destroy, :delete_team_from_booking]
   before_action :authenticate
+  before_action :owned, only: [:edit, :show]
 
   def index
     @bookings = current_user.bookings
@@ -115,6 +116,28 @@ class BookingsController < ApplicationController
     end
   end
 
+  def delete_team_from_booking
+    if @booking.local_team != -1
+      if current_user.id == Team.find_by_id(@booking.local_team).user_id
+        @booking.destroy
+        respond_to do |format|
+          format.html { redirect_to bookings_path, notice: 'Booking was  destroyed.' }
+          format.json { head :no_content }
+        end
+      end
+    else
+      if @booking.away_team != -1
+        if current_user.id == Team.find_by_id(@booking.away_team).user_id
+          @booking.update(away_team: -1)
+          respond_to do |format|
+            format.html { redirect_to bookings_url, notice: 'Your team was succesfully removed from the booking.' }
+            format.json { head :no_content }
+          end
+        end
+      end
+    end
+  end
+
   def team_bookings
     @sports_installation = SportsInstallation.where(installation_id: params[:installation_id], sport_id: params[:sport_id]).first
     @team_bookings = Booking.open_team_booking.where(sports_installation: @sports_installation).where.not(user: current_user).date(extract_date_from_params)
@@ -147,6 +170,15 @@ class BookingsController < ApplicationController
     params.require(:booking).permit(:sports_installation, :time_band)
   end
 
-  protected :extract_date_from_params, :new_booking_params_sended?, :new_team_booking_params_sended?, :new_team_booking_params_sended?
+  def owned
+    if @booking.owned_by?(current_user)
+      true
+    else
+      redirect_to bookings_path, alert: "You don't own the requested booking."
+      false
+    end
+  end
+
+  protected :extract_date_from_params, :new_booking_params_sended?, :new_team_booking_params_sended?, :new_team_booking_params_sended?, :owned
   private :set_booking
 end

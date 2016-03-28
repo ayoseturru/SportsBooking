@@ -2,23 +2,41 @@
   <div class="row col s6">
     <p id="notice"><%= notice %></p>
     <div class="col s12 valign-wrapper mt-30">
-      <div class="col s4">
+      <div class="col s5">
         <p>
           <strong>Sports installation:</strong>
-          <%= @booking.sports_installation %>
+          <%= Installation.find_by_id(@booking.sports_installation.installation_id).name %>
+        </p>
+      </div>
+      <div class="col s3">
+        <p>
+          <strong>Date:</strong>
+          <%= @booking.time_band.date %>
         </p>
       </div>
       <div class="col s4">
         <p>
           <strong>Time band:</strong>
-          <%= @booking.time_band %>
+          <%= @booking.time_band.start_hour %> to  <%= @booking.time_band.end_hour %>
         </p>
       </div>
+    </div>
 
-      <div class="col s4 valign">
-        <%= link_to 'Edit', edit_booking_path(@booking), class: "btn blue lighten-2" unless !@booking.owned_by?(current_user) %>
-        <%= link_to 'Back', bookings_path, class: "btn blue lighten-2" %>
-      </div>
+    <div class="col s10 valign">
+      <% if @booking.local_team != -1 %>
+          <% if current_user.id == Team.find_by_id(@booking.local_team).user_id %>
+              <%= link_to 'Remove team from booking', delete_team_from_booking_bookings_path(id: @booking.id), method: :post, class: "btn red ", data: { confirm: 'Are you sure? The booking will be removed.' }%>
+          <% end %>
+      <% end %>
+
+      <% if @booking.away_team != -1 %>
+          <% if current_user.id == Team.find_by_id(@booking.away_team).user_id %>
+              <%= link_to 'Remove team from booking', delete_team_from_booking_bookings_path(id: @booking.id), method: :post, class: "btn red", data: {  confirm:  'Team removed' } %>
+          <% end %>
+      <% end %>
+
+      <%= link_to 'Edit', edit_booking_path(@booking), class: "btn blue lighten-2" unless !@booking.owned_by?(current_user) %>
+      <%= link_to 'Back', bookings_path, class: "btn blue lighten-2" %>
     </div>
   </div>
 </div>
