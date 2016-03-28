@@ -49,12 +49,14 @@ class BookingsController < ApplicationController
   end
 
   def update
+    time_band_id = @booking.time_band_id
     respond_to do |format|
-      if @booking.update(booking_params)
+      if new_booking_params_sended? && @booking.update(time_band_id: params[:time_band_id])
+        SportsInstallationsTimeBand.where(time_band_id: time_band_id, sports_installation_id: @booking.sports_installation_id).first.update(free: true)
         format.html { redirect_to @booking, notice: 'Booking was successfully updated.' }
         format.json { render :show, status: :ok, location: @booking }
       else
-        format.html { render :edit }
+        format.html { render :edit, notice: "Make you sure you have selected a sport, a installation and a time band..." }
         format.json { render json: @booking.errors, status: :unprocessable_entity }
       end
     end

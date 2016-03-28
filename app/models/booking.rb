@@ -4,6 +4,7 @@ class Booking < ActiveRecord::Base
   belongs_to :time_band
   before_save :book_time_band, :set_teams
   before_destroy :free_time_band
+  after_update :book_time_band
   scope :open_team_booking, -> { where.not(local_team: -1).where(away_team: -1) }
   scope :date, -> (date) { includes(:time_band).where('date = ?', date).references(:time_band) }
 
