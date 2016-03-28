@@ -56,29 +56,33 @@
                 <% team.users.each do |member| %>
                     <% if member.id != current_user.id %>
                         <li class="collection-item">
-                          <div class="center-align"><h5><%= member.name %></h5></div>
+                          <%= "<div class='center-align row' id='#{member.id}'>".html_safe %>
+                          <h5 class="col s5"><%= member.name %></h5>
                           <% if current_user.id == team.user.id %>
-                              <div class="center-align"><%= link_to '<i class="material-icons icon-white ">delete</i>'.html_safe, team, method: :delete, data: {confirm: 'Are you sure?'}, class: "btn red darken-1" %></div>
-                          <% end %>
+                              <%= "<div class='center-align' >".html_safe %>
+                              <%= link_to '<i class="col s3 material-icons icon-white ">delete</i>'.html_safe, remove_player_teams_path(team_id: team.id, player_id: member.id), remote: true, method: :post, data: {confirm: 'Are you sure?'}, class: "btn red darken-1" %>
+                            </div>
+                        <% end %>
+                        </div>
                         </li>
                     <% end %>
                 <% end %>
-              </ul>
-            </div>
-            <div class="modal-footer">
-              <a class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
-            </div>
-            <% if team.user.id == current_user.id %>
-                <td><%= link_to 'Edit', edit_team_path(team), class: "btn blue lighten-2" %></td>
-                <td><%= link_to '<i class="material-icons icon-white ">delete</i>'.html_safe, team, method: :delete, data: {confirm: 'Are you sure?'}, class: "btn red darken-1" %></td>
-            <% else %>
-                <td><%= link_to 'Leave', team, method: :delete, data: {confirm: 'Are you sure?'}, class: "btn red darken-1" %></td>
-            <% end %>
-          </tr>
+                </ul>
+                </div>
+                <div class="modal-footer">
+                  <a class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+                </div>
+                <% if team.user.id == current_user.id %>
+                    <td><%= link_to 'Edit', edit_team_path(team), class: "btn blue lighten-2" %></td>
+                    <td><%= link_to '<i class="material-icons icon-white ">delete</i>'.html_safe, team, method: :delete, data: {confirm: 'Are you sure?'}, class: "btn red darken-1" %></td>
+                <% else %>
+                    <td><%= link_to 'Leave', team, method: :delete, data: {confirm: 'Are you sure?'}, class: "btn red darken-1" %></td>
+                <% end %>
+                </tr>
       <% end %>
       </tbody>
-    </table>
-  </div>
-  <br>
+      </table>
+      </div>
+      <br>
 
-</div>
+      </div>

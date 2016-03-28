@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :teams do
     collection do
       put "add_player"
+      post "remove_player"
     end
   end
 

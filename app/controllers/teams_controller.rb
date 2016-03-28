@@ -70,6 +70,18 @@ class TeamsController < ApplicationController
     end
   end
 
+  def remove_player
+    @team = Team.find(params[:team_id])
+    @team.users.delete(User.find_by_id(params[:player_id]))
+
+    @player_id = params[:player_id]
+
+    respond_to do |format|
+      # format.html { redirect_to teams_url, notice: 'Team was successfully destroyed.' }
+      # format.json { head :no_content }
+      format.js
+    end
+  end
 
   # PATCH/PUT /teams/1
   # PATCH/PUT /teams/1.json
@@ -94,6 +106,7 @@ class TeamsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
 
   private
   # Use callbacks to share common setup or constraints between actions.
