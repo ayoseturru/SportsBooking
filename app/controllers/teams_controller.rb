@@ -1,5 +1,6 @@
 class TeamsController < ApplicationController
   before_action :set_team, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate
 
   # GET /teams
   # GET /teams.json
@@ -29,7 +30,7 @@ class TeamsController < ApplicationController
         format.js
       else
         format.js {
-          render "player_not_found"
+          render "_player_not_found"
         }
       end
     end
@@ -41,11 +42,12 @@ class TeamsController < ApplicationController
     players_to_save = []
 
     params[:players_list].split(",").each do |id|
-      players_to_save.push(User.find(id))
+      players_to_save.include?(User.find_by_id(id))? next: players_to_save.push(User.find_by_id(id))
     end
 
     @team = current_user.teams.new(team_params)
     @team.users = players_to_save
+    #Rails.logger.debug "#{players_to_save}"
 
 
     respond_to do |format|
