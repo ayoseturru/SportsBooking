@@ -32,6 +32,19 @@ class TeamsController < ApplicationController
   def edit
   end
 
+  def add_players_from_edit
+    @player = User.find_by_dni(params[:dni])
+    @team = Team.find_by_id(params[:team_id])
+    respond_to do |format|
+      if @player and !Team.find_by_id(params[:team_id]).users.include?(@player)
+        @team.users.push(@player)
+      else
+        @player = false
+      end
+      format.js
+    end
+  end
+
   def add_player
     @player = User.find_by_dni(params[:dni])
 

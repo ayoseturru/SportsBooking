@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     collection do
       put "add_player"
       post "remove_player"
+      post "add_players_from_edit"
     end
   end
 

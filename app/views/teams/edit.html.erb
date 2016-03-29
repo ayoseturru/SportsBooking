@@ -1,6 +1,9 @@
-<h1>Editing Team</h1>
+<div class="container">
+  <div class="row">
+    <h1 class="col s8 offset-s2">Editing Team</h1>
+  </div>
+</div>
 
 <%= render 'form' %>
+<%= hidden_field_tag "team_id", @team.id %>
 
-<%= link_to 'Show', @team %> |
-<%= link_to 'Back', teams_path %>
