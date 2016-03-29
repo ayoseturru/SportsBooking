@@ -1,1 +1,24 @@
+<div class="container">
+  <div class="row">
+    <h3 class="col s3 offset-s2">Create Team</h3>
+  </div>
+</div>
 <%= render 'form' %>
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function () {
+    $("#close_modal").on("click", function () {
+      $(".lean-overlay").css("display", "none");
+    });
+    $('select').material_select();
+    $('.modal-trigger').leanModal();
+    $("#add_player_button").on("click", function () {
+      $.ajax({
+        type: "PUT",
+        url: "/teams/add_player",
+        data: {
+          dni: $("#dni").val(),
+        }
+      });
+    });
+  });
+</script>

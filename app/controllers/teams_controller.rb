@@ -96,6 +96,16 @@ class TeamsController < ApplicationController
     end
   end
 
+  def leave_team
+    @team = Team.find(params[:team_id])
+    @team.users.delete(User.find_by_id(params[:player_id]))
+
+    respond_to do |format|
+      format.html { redirect_to teams_url }
+      format.json { head :no_content }
+    end
+  end
+
   # PATCH/PUT /teams/1
   # PATCH/PUT /teams/1.json
   def update

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       put "add_player"
       post "remove_player"
       post "add_players_from_edit"
+      post "leave_team"
     end
   end
 

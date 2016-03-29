@@ -1,8 +1,19 @@
-$(document).ready(function(){
+$(document).ready(function () {
   $('.tooltipped').tooltip({delay: 15});
 });
 
-Materialize.toast('Player added succesfully', 1000, 'rounded');
+var exist = false;
 
-$("#players ul").append("<%= j render "add_player" %>");
-$("#players").val($("#players").val() + "<%= @player.id.to_s %>" + ",");
+$("#players").val().split(",").forEach(function (id) {
+  if (id == "<%= @player.id.to_s %>") {
+    exist = true;
+  }
+});
+
+if (!exist) {
+  Materialize.toast('Player added succesfully', 1000, 'rounded');
+  $("#players ul").append("<%= j render "add_player" %>");
+  $("#players").val($("#players").val() + "<%= @player.id.to_s %>" + ",");
+}else{
+  Materialize.toast('Player already exists', 1000, 'rounded');
+}

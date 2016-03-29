@@ -76,7 +76,7 @@
                     <td><%= link_to 'Edit', edit_team_path(team), class: "btn blue lighten-2" %></td>
                     <td><%= link_to '<i class="material-icons icon-white ">delete</i>'.html_safe, team, method: :delete, data: {confirm: 'Are you sure?'}, class: "btn red darken-1" %></td>
                 <% else %>
-                    <td><%= link_to 'Leave', team, method: :delete, data: {confirm: 'Are you sure?'}, class: "btn red darken-1" %></td>
+                    <td><%= link_to 'Leave', leave_team_teams_path(team_id: team.id, player_id: current_user.id), method: :post, data: {confirm: 'Are you sure?'}, class: "btn red darken-1" %></td>
                 <% end %>
                 </tr>
       <% end %>
