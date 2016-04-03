@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       get 'team_bookings_table'
       post 'add_team_to_existing'
       post 'delete_team_from_booking'
+      post 'exit_free_booking'
     end
   end
 

@@ -1,8 +1,8 @@
 require 'date'
 class BookingsController < ApplicationController
-  before_action :set_booking, only: [:show, :edit, :update, :destroy, :delete_team_from_booking]
+  before_action :set_booking, only: [:show, :edit, :update, :destroy, :delete_team_from_booking, :exit_free_booking]
   before_action :authenticate
-  before_action :owned, only: [:edit, :show]
+  before_action :owned, only: [:edit]
 
   def index
     @bookings = current_user.bookings
@@ -45,6 +45,24 @@ class BookingsController < ApplicationController
       end
     else
       redirect_to new_booking_path, alert: "Make you sure you have selected a sport, a installation and a time band..."
+    end
+  end
+
+  def exit_free_booking
+    participants = @booking.participants.split(',')
+    if @booking.user_id == current_user.id
+      @booking.destroy
+      respond_to do |format|
+        format.html { redirect_to bookings_path, notice: 'Booking was destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      participants.delete(current_user.dni)
+      @booking.update(participants: participants.join(','))
+      respond_to do |format|
+        format.html { redirect_to bookings_path, notice: 'You were succesfully removed from the booking.' }
+        format.json { head :no_content }
+      end
     end
   end
 

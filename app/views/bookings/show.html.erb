@@ -25,18 +25,41 @@
     <div class="col s10 valign">
       <% if @booking.local_team != -1 %>
           <% if current_user.id == Team.find_by_id(@booking.local_team).user_id %>
-              <%= link_to 'Remove team from booking', delete_team_from_booking_bookings_path(id: @booking.id), method: :post, class: "btn red ", data: { confirm: 'Are you sure? The booking will be removed.' }%>
+              <%= link_to 'Remove team from booking', delete_team_from_booking_bookings_path(id: @booking.id), method: :post, class: "btn red ", data: {confirm: 'Are you sure? The booking will be removed.'} %>
           <% end %>
       <% end %>
 
       <% if @booking.away_team != -1 %>
           <% if current_user.id == Team.find_by_id(@booking.away_team).user_id %>
-              <%= link_to 'Remove team from booking', delete_team_from_booking_bookings_path(id: @booking.id), method: :post, class: "btn red", data: {  confirm:  'Team removed' } %>
+              <%= link_to 'Remove team from booking', delete_team_from_booking_bookings_path(id: @booking.id), method: :post, class: "btn red", data: {confirm: 'Team removed'} %>
           <% end %>
       <% end %>
 
       <%= link_to 'Edit', edit_booking_path(@booking), class: "btn blue lighten-2" unless !@booking.owned_by?(current_user) %>
       <%= link_to 'Back', bookings_path, class: "btn blue lighten-2" %>
     </div>
+
+    <row>
+        <% if @booking.max_size > 0 %>
+            <ul class="collection with-header col s4 offset-s4">
+              <li class="collection-header"><h4>Participants:</h4></li>
+              <% @booking.participants.split(',').each do |participant| %>
+                  <!--href to user profile-->
+                    <div>
+                      <li class="collection-item col s12">
+                      <!--link to user profile-->
+                      <%= link_to User.find_by_dni(participant).name, bookings_path %>
+                      <% if User.find_by_dni(participant) == current_user %>
+                          <%= link_to '<i class="material-icons icon-trf   ">delete</i>'.html_safe, exit_free_booking_bookings_path(id: @booking.id), method: :post, data: {confirm: 'Are you sure?'}, class: "secondary-content" %>
+                      <% end %>
+                        <div class="divider col s12">
+                        </div>
+                      </li>
+                    </div>
+              <% end %>
+        <% end %>
+        </ul>
+    </row>
   </div>
 </div>
+
