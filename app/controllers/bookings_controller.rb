@@ -37,7 +37,7 @@ class BookingsController < ApplicationController
   def create
     if new_booking_params_sended?
       sport_installation = SportsInstallation.where(sport_id: params[:sport], installation_id: params[:installation]).first
-      @booking = current_user.bookings.new(sports_installation_id: sport_installation.id, time_band_id: params[:time_band_id])
+      @booking = current_user.bookings.new(sports_installation_id: sport_installation.id, time_band_id: params[:time_band_id], max_size: 0)
       if @booking.save
         redirect_to bookings_path, notice: "Booking was successfully created"
       else
@@ -83,7 +83,7 @@ class BookingsController < ApplicationController
   def create_team
     if new_team_booking_params_sended?
       sport_installation = SportsInstallation.where(sport_id: params[:sport], installation_id: params[:installation]).first
-      @booking = current_user.bookings.new(sports_installation_id: sport_installation.id, time_band_id: params[:time_band_id], local_team: params[:team_id])
+      @booking = current_user.bookings.new(sports_installation_id: sport_installation.id, time_band_id: params[:time_band_id], local_team: params[:team_id], max_size: 0)
       if @booking.save
         redirect_to bookings_path, notice: "Team Booking was successfully created"
       else
