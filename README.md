@@ -8,6 +8,10 @@ This README would normally document whatever steps are necessary to get your app
 * Version
 * [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
 
+Sportsbooking is a Rails 4 + MaterializeCSS app for booking sports installations.
+
+This is a proyect forn an Agile Development Methods subject created by 6 friends.
+
 ### How do I get set up? ###
 
 # 1. Clone the git repo #
