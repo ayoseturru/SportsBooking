@@ -23,9 +23,11 @@ This README would normally document whatever steps are necessary to get your app
 
 # 3. Open a browser and go to localhost:3000 #
 
-**There exist two dummy users
-*1 test: 12345678
-*2 test1: 12345678**
+**There exist two dummy users with the following credentials**
+* test --> 12345678
+* test1 --> 12345678
+
+# 4. Select a month to load the datetimes in seed.rb #
 
 * Summary of set up
 * Configuration
