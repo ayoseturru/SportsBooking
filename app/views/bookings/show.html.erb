@@ -48,9 +48,9 @@
                     <div>
                       <li class="collection-item col s12">
                       <!--link to user profile-->
-                      <%= link_to User.find_by_dni(participant).name, bookings_path %>
+                      <%= link_to User.find_by_dni(participant).name, user_path(User.find_by_dni(participant)) %>
                       <% if User.find_by_dni(participant) == current_user %>
-                          <%= link_to '<i class="material-icons icon-trf   ">delete</i>'.html_safe, exit_free_booking_bookings_path(id: @booking.id), method: :post, data: {confirm: 'Are you sure?'}, class: "secondary-content" %>
+                          <%= link_to '<i class="black-text material-icons icon-trf ">delete</i>'.html_safe, exit_free_booking_bookings_path(id: @booking.id), method: :post, data: {confirm: 'Are you sure?'}, class: "secondary-content" %>
                       <% end %>
                         <div class="divider col s12">
                         </div>
