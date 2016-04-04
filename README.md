@@ -10,16 +10,22 @@ This README would normally document whatever steps are necessary to get your app
 
 ### How do I get set up? ###
 
-1. Clone the git repo
-2. 2 Run the following commands from a terminal
-    $ bundle
-    $ rake db:setup
-    $ rails server
-3. Open a browser and go to localhost:3000
+# 1. Clone the git repo #
+# 2. Run the following commands from a terminal #
 
-There exist two dummy users
+```
+#!bash
+
+- $ bundle
+- $ rake db:setup
+- $ rails server
+```
+
+# 3. Open a browser and go to localhost:3000 #
+
+**There exist two dummy users
     1 test: 12345678
-    2 test1: 12345678
+    2 test1: 12345678**
 
 * Summary of set up
 * Configuration
