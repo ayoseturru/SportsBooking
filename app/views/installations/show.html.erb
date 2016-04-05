@@ -10,5 +10,9 @@
   <%= @installation.address %>
 </p>
 
+<% @sports.each do |sport| %>
+    <p><%= sport.sport.name %></p>
+<% end %>
+
 <%= link_to 'Edit', edit_installation_path(@installation) %> |
 <%= link_to 'Back', installations_path %>

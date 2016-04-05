@@ -10,6 +10,7 @@ class InstallationsController < ApplicationController
   # GET /installations/1
   # GET /installations/1.json
   def show
+    @sports = SportsInstallation.where(installation_id: @installation.id)
   end
 
   # GET /installations/new
@@ -62,13 +63,13 @@ class InstallationsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_installation
-      @installation = Installation.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_installation
+    @installation = Installation.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def installation_params
-      params.require(:installation).permit(:name, :address)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def installation_params
+    params.require(:installation).permit(:name, :address)
+  end
 end
