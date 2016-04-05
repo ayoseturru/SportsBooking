@@ -11,3 +11,7 @@
 .mt-30 {
     margin-top: 30px;
 }
+
+.brand-logo img {
+    max-height: 50px;
+}
