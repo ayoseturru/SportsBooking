@@ -1,0 +1,33 @@
+<% if @message.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@message.errors.count, "error") %> prohibited this message from being saved:</h2>
+
+      <ul>
+        <% @message.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>
+
+<div class="row">
+  <div class="row">
+    <%= form_for(@message, class: "col s12") do |f| %>
+        <div class="actions input-field col s12">
+          <i class="material-icons prefix">account_circle</i>
+          <%= f.text_field :sender, required: true %>
+          <%= f.label :sender %>
+        </div>
+        <div class="input-field col s12">
+          <i class="material-icons prefix">message</i>
+          <%= f.text_area :content, class: "materialize-textarea", required: true %>
+          <%= f.label :content %>
+        </div>
+        <div class="actions input-field col s12">
+          <%= f.submit class: "btn button blue lighten-2" %>
+        </div>
+        </div>
+    <% end %>
+    </div>
+</div>
+

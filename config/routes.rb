@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :messages
   root 'sessions#new'
 
   resource :session, only: [:new, :create, :destroy]
