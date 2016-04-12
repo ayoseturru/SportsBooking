@@ -14,4 +14,8 @@ class SessionsController < ApplicationController
     reset_session
     redirect_to action: :new, notice: "Logout successfully"
   end
+
+  def welcome
+
+  end
 end

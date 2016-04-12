@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160412103228) do
+ActiveRecord::Schema.define(version: 20160412154105) do
 
   create_table "bookings", force: :cascade do |t|
     t.integer  "sports_installation_id"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20160412103228) do
     t.string   "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "images"
   end
 
   create_table "installations_sports", id: false, force: :cascade do |t|

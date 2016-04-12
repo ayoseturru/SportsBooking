@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
   resources :messages
-  root 'sessions#new'
+  root 'sessions#welcome'
 
-  resource :session, only: [:new, :create, :destroy]
+  resource :session, only: [:new, :create, :destroy] do
+    collection do
+      get "welcome"
+    end
+  end
 
   resources :teams do
     collection do

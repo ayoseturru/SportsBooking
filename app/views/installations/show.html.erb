@@ -1,18 +1,33 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @installation.name %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @installation.address %>
-</p>
-
-<% @sports.each do |sport| %>
-    <p><%= sport.sport.name %></p>
-<% end %>
-
-<%= link_to 'Edit', edit_installation_path(@installation) %> |
-<%= link_to 'Back', installations_path %>
+<div class="container">
+  <h3 class="title"><%= @installation.name %></h3>
+  <h5>Sports</h5>
+  <ul class="collection">
+    <% @sports.each do |sport| %>
+        <li class="collection-item avatar">
+          <%= image_tag "/sport.jpg", id: "sport_logo" %>
+          <p><%= sport.sport.name %></p>
+          <a href="/bookings/new" class="secondary-content"><i class="material-icons">av_timer</i></a>
+        </li>
+    <% end %>
+  </ul>
+  <div class="slider">
+    <ul class="slides">
+      <%= @installation.images.split(",").each do |image| %>
+          <li>
+            <%= image_tag "/installations/#{image}.jpg" %>
+            <div class="caption center-align">
+              <h3>ULPG installations</h3>
+              <h5 class="light grey-text text-lighten-3">Book now!</h5>
+            </div>
+          </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function () {
+    $('.carousel').carousel();
+    $('.carousel-slider').carousel();
+    $('.slider').slider({full_width: true});
+  });
+</script>

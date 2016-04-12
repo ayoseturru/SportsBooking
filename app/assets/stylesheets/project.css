@@ -15,3 +15,8 @@
 .brand-logo img {
     max-height: 50px;
 }
+
+#sport_logo {
+    height: 50px;
+    /*width: 50px;*/
+}

@@ -1,10 +1,10 @@
 require 'date'
 require 'digest'
 
-sports_center_installation = Installation.create(name: "Sports Center", address: "Campus Universitario de Tafira")
-outdoor_football_installation = Installation.create(name: "Outdoor Court", address: "Campus Universitario de Tafira")
-football_stadium = Installation.create(name: "ULPGC Football Stadium", address: "Campus Universitario de Tafira")
-basketball_outdoor= Installation.create(name: "Basketball Outdoor Court", address: "Campus Universitario de Tafira")
+sports_center_installation = Installation.create(name: "Sports Center", address: "Campus Universitario de Tafira", images: "sports_centers_1,sports_centers_2,sports_centers_3")
+outdoor_football_installation = Installation.create(name: "Outdoor Court", address: "Campus Universitario de Tafira", images: "outdoor_court_1,outdoor_court_2")
+football_stadium = Installation.create(name: "ULPGC Football Stadium", address: "Campus Universitario de Tafira", images: "football_stadium_1,football_stadium_2,football_stadium_3")
+basketball_outdoor= Installation.create(name: "Basketball Outdoor Court", address: "Campus Universitario de Tafira", images: "basketball_outdoor_1,basketball_outdoor_2,basketball_outdoor_3")
 
 indoor_football = Sport.create(name: "Futsal", max_players: 10, installations: [sports_center_installation, outdoor_football_installation])
 football_seven_a_side = Sport.create(name: "Football Seven-a-side", max_players: 14, installations: [football_stadium])

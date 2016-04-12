@@ -1,29 +1,25 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
 
-<h1>Listing Sports Installations</h1>
+  <h4 class="center title">Sports Installations</h4>
 
-<table>
-  <thead>
-  <tr>
-    <th>Installation</th>
-    <th>Sport</th>
-    <th colspan="3"></th>
-  </tr>
-  </thead>
+  <table class="responsive-table bordered striped centered">
+    <thead>
+    <tr>
+      <th>Installation</th>
+      <th>Sport</th>
+      <th colspan="3"></th>
+    </tr>
+    </thead>
 
-  <tbody>
-  <% @sports_installations.each do |sports_installation| %>
-      <tr>
-        <td><%= link_to sports_installation.installation.name, sports_installation.installation %></td>
-        <td><%= sports_installation.sport.name %></td>
-        <td><%= link_to 'Show', sports_installation %></td>
-        <td><%= link_to 'Edit', edit_sports_installation_path(sports_installation) %></td>
-        <td><%= link_to 'Destroy', sports_installation, method: :delete, data: {confirm: 'Are you sure?'} %></td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
+    <tbody>
+    <% @sports_installations.each do |sports_installation| %>
+        <tr>
+          <td><%= link_to sports_installation.installation.name, sports_installation.installation %></td>
+          <td><%= sports_installation.sport.name %></td>
+          <td><%= link_to 'Show', sports_installation, class: "button btn blue blue-ligthen-2 lighten-2" %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
 
-<br>
-
-<%= link_to 'New Sports installation', new_sports_installation_path %>
+</div>
