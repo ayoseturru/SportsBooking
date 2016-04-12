@@ -14,7 +14,7 @@
             <%= message.content %> <br>
             <%= message.date.split("+")[0] %>
           </p>
-          <%= link_to message, class: "secondary-content" do %>
+          <%= link_to new_message_path(user: User.find(message.sender).dni), class: "secondary-content" do %>
               <i class="material-icons">chat_bubble</i>
           <% end %>
         </li>
@@ -28,18 +28,18 @@
           <%= link_to User.find(message.user) do %>
               <%= image_tag "/default_profile.jpg", class: "circle" %>
           <% end %>
-          <span class="title"><%= User.find(message.user).name %>
-            , <b>dni: </b> <%= User.find(message.user).dni %></span>
+          <span class="title"><%= message.user.name %>
+            , <b>dni: </b> <%= message.user.dni %></span>
           <p>
             <%= message.content %> <br>
             <%= message.date.split("+")[0] %>
           </p>
-          <%= link_to message, class: "secondary-content" do %>
+          <%= link_to new_message_path(user: message.user.dni), class: "secondary-content" do %>
               <i class="material-icons">chat_bubble</i>
           <% end %>
         </li>
     <% end %>
   </ul>
 
-  <%= link_to 'New Message', new_message_path %>
+  <%= link_to 'New Message', new_message_path, class: "button btn blue lighten-2" %>
 </div>

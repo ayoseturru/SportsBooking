@@ -13,9 +13,9 @@
 <div class="row">
   <div class="row">
     <%= form_tag messages_path, method: :post, class: "col s12" do |f| %>
-        <div class="actions input-field col s12">
+        <div class="actions input-field active col s12">
           <i class="material-icons prefix">account_circle</i>
-          <%= text_field_tag :user_id, nil, required: true %>
+          <%= text_field_tag :user_id, @user.dni, class: "active", required: true %>
           <%= label_tag :user_id %>
         </div>
         <div class="input-field col s12">

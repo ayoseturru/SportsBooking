@@ -17,6 +17,7 @@ class MessagesController < ApplicationController
   # GET /messages/new
   def new
     @message = Message.new
+    @user = params[:user] ? User.find_by_dni(params[:user]) : ""
   end
 
   # GET /messages/1/edit
@@ -32,7 +33,7 @@ class MessagesController < ApplicationController
     respond_to do |format|
       if user_id and @message.save
         @message.save
-        format.html { redirect_to @message, notice: 'Message was successfully created.' }
+        format.html { redirect_to messages_path, notice: 'Message was successfully created.' }
         format.json { render :show, status: :created, location: @message }
       else
         format.html { redirect_to new_message_path, alert: "Make you sure all fields are filled and the DNI belongs to a user" }
