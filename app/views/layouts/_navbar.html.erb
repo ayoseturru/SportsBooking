@@ -12,6 +12,10 @@
       <li class="divider"></li>
       <li><%= link_to "Create team", new_team_path %></li>
     </ul>
+    <ul id="messages_dropdown" class="dropdown-content  ">
+      <li><%= link_to "New message", new_message_path %></li>
+      <li><%= link_to "Messages", messages_path %></li>
+    </ul>
     <nav class="blue">
       <div class="nav-wrapper">
         <%= link_to image_tag("mysb_logo_8.png"), bookings_path, class: "brand-logo" %>
@@ -22,7 +26,9 @@
             <a class="dropdown-button" href="#!" data-activates="team_dropdown">Team<i class="material-icons right">arrow_drop_down</i></a>
           </li>
           <li><a href="badges.html">Profile</a></li>
-          <li><%= link_to "New message", new_message_path %></li>
+          <li>
+            <a class="dropdown-button" href="#!" data-activates="messages_dropdown">Messages<i class="material-icons right">arrow_drop_down</i></a>
+          </li>
           <li>
             <a class="dropdown-button" href="#!" data-activates="bookings_dropdown">Bookings<i class="material-icons right">arrow_drop_down</i></a>
           </li>

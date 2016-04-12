@@ -1,31 +1,45 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
 
-<h1>Listing Messages</h1>
+  <h2 class="title">Listing delivered messages</h2>
 
-<table>
-  <thead>
-    <tr>
-      <th>Content</th>
-      <th>User</th>
-      <th>Sender</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+  <ul class="collection">
     <% @messages.each do |message| %>
-      <tr>
-        <td><%= message.content %></td>
-        <td><%= message.user_id %></td>
-        <td><%= message.sender %></td>
-        <td><%= link_to 'Show', message %></td>
-        <td><%= link_to 'Edit', edit_message_path(message) %></td>
-        <td><%= link_to 'Destroy', message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+        <li class="collection-item avatar">
+          <%= link_to User.find(message.sender) do %>
+              <%= image_tag "/default_profile.jpg", class: "circle" %>
+          <% end %>
+          <span class="title"><%= User.find(message.sender).name %>
+            , <b>dni:</b><%= User.find(message.sender).dni %></span>
+          <p>
+            <%= message.content %> <br>
+            <%= message.date.split("+")[0] %>
+          </p>
+          <%= link_to message, class: "secondary-content" do %>
+              <i class="material-icons">chat_bubble</i>
+          <% end %>
+        </li>
     <% end %>
-  </tbody>
-</table>
+  </ul>
 
-<br>
+  <h2 class="title">Listing sended messages</h2>
+  <ul class="collection">
+    <% @messages_sended.each do |message| %>
+        <li class="collection-item avatar">
+          <%= link_to User.find(message.user) do %>
+              <%= image_tag "/default_profile.jpg", class: "circle" %>
+          <% end %>
+          <span class="title"><%= User.find(message.user).name %>
+            , <b>dni: </b> <%= User.find(message.user).dni %></span>
+          <p>
+            <%= message.content %> <br>
+            <%= message.date.split("+")[0] %>
+          </p>
+          <%= link_to message, class: "secondary-content" do %>
+              <i class="material-icons">chat_bubble</i>
+          <% end %>
+        </li>
+    <% end %>
+  </ul>
 
-<%= link_to 'New Message', new_message_path %>
+  <%= link_to 'New Message', new_message_path %>
+</div>

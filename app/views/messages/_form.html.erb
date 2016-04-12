@@ -12,19 +12,19 @@
 
 <div class="row">
   <div class="row">
-    <%= form_for(@message, class: "col s12") do |f| %>
+    <%= form_tag messages_path, method: :post, class: "col s12" do |f| %>
         <div class="actions input-field col s12">
           <i class="material-icons prefix">account_circle</i>
-          <%= f.text_field :sender, required: true %>
-          <%= f.label :sender %>
+          <%= text_field_tag :user_id, nil, required: true %>
+          <%= label_tag :user_id %>
         </div>
         <div class="input-field col s12">
           <i class="material-icons prefix">message</i>
-          <%= f.text_area :content, class: "materialize-textarea", required: true %>
-          <%= f.label :content %>
+          <%= text_area_tag :content, nil, class: "materialize-textarea", required: true %>
+          <%= label_tag :content %>
         </div>
         <div class="actions input-field col s12">
-          <%= f.submit class: "btn button blue lighten-2" %>
+          <%= submit_tag "Send", class: "btn button blue lighten-2" %>
         </div>
         </div>
     <% end %>
