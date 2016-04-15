@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       post "remove_player"
       post "add_players_from_edit"
       post "leave_team"
+      post "delete_image_team"
     end
   end
 

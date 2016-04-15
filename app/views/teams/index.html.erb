@@ -45,6 +45,11 @@
             <!-- Modal Structure -->
             <%= "<div id='modal#{identifier}' class='modal'>".html_safe %>
             <div class="modal-content">
+              <% if team.image_file_name != nil %>
+                  <ul>
+                    <%= image_tag team.image.url(:original), width: "99%", height: "99%" %>
+                  </ul>
+              <% end %>
               <ul class="collection with-header">
                 <li class="collection-header">
                   <h4>
@@ -71,6 +76,7 @@
                 </div>
                 <div class="modal-footer">
                   <a class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+                </div>
                 </div>
                 <% if team.user.id == current_user.id %>
                     <td><%= link_to 'Edit', edit_team_path(team), class: "btn blue lighten-2" %></td>

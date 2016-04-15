@@ -130,6 +130,15 @@ class TeamsController < ApplicationController
     end
   end
 
+  def delete_image_team
+    @team = Team.find(params[:id])
+    @team.image = nil
+    @team.save
+    respond_to do |format|
+      format.js
+    end
+  end
+
 
   private
   # Use callbacks to share common setup or constraints between actions.
@@ -139,6 +148,6 @@ class TeamsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def team_params
-    params.require(:team).permit(:user_id, :name, :sport_id)
+    params.require(:team).permit(:user_id, :name, :sport_id, :image)
   end
 end
