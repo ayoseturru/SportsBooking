@@ -1,29 +1,47 @@
-<%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<div class="container">
+  <div class="row">
+    <div class="col s3 offset-s2">
+      <%= form_for(@user) do |f| %>
+          <% if @user.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(@user.errors.count, "error") %> prohibited this team from being saved:</h2>
 
-      <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+                <ul>
+                  <% @user.errors.full_messages.each do |message| %>
+                      <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+          <% end %>
+
+          <div class="input-field">
+            <%= f.label :dni %><br>
+            <%= f.text_field :dni %>
+          </div>
+
+          <div class="input-field">
+            <%= f.label :name %><br>
+            <%= f.text_field :name %>
+          </div>
+
+          <div class="input-field">
+            <%= f.label :password %><br>
+            <%= f.text_field :password %>
+          </div>
+
+
+          <div class="center-align" id="buttons_zone" >
+            <%= f.file_field :image, style: "display: none" %>
+            <a id="triggerFile" class="waves-effect waves-light btn"><i class="material-icons left">picture_in_picture</i>Image</a>
+            <br><br>
+            <div class="actions">
+              <button class="btn waves-effect waves-light blue lighten-1" type="submit" name="action">
+                <%= f.submit %>
+              </button>
+            </div>
+          </div>
+          <br/>
       <% end %>
-      </ul>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :dni %><br>
-    <%= f.text_field :dni %>
   </div>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :password %><br>
-    <%= f.text_field :password %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>
