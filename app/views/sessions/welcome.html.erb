@@ -1,5 +1,15 @@
-<h2 class="title hide-on-med-and-down">Welcome to SportsBookings ULPGC!</h2>
-<h4 class="title hide-on-med-and-up">Welcome to SportsBookings ULPGC!</h4>
+
+<div class="row">
+  <div class="col s8">
+    <h4 class="title hide-on-med-and-down">Welcome to SportsBookings ULPGC!</h4>
+    <h4 class="title hide-on-med-and-up">Welcome to SportsBookings ULPGC!</h4>
+    <h4 class="title hide-on-med-and-up">Welcome to SportsBookings ULPGC!</h4>
+  </div>
+
+  <div class="">
+    <%= link_to "Login!", new_session_path, class: "button btn blue right mt-20" %>
+  </div>
+</div>
 <div class="slider">
   <ul class="slides">
     <li>
@@ -25,13 +35,10 @@
     </li>
   </ul>
 </div>
-<div class="container">
-  <%= link_to "Login!", new_session_path, class: "button btn blue" %>
-</div>
 <script type="text/javascript" charset="utf-8">
-  $(document).ready(function () {
-    $('.carousel').carousel();
-    $('.carousel-slider').carousel();
-    $('.slider').slider({full_width: true});
-  });
+$(document).ready(function () {
+  $('.carousel').carousel();
+  $('.carousel-slider').carousel();
+  $('.slider').slider({full_width: true});
+});
 </script>
