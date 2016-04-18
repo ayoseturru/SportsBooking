@@ -11,6 +11,7 @@ class InstallationsController < ApplicationController
   # GET /installations/1.json
   def show
     @sports = SportsInstallation.where(installation_id: @installation.id)
+    @comment = Comment.new
   end
 
   # GET /installations/new
