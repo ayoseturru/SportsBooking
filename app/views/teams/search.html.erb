@@ -1,0 +1,25 @@
+<div class="container">
+
+  <div>
+    <h3 class="center">Search</h3>
+  </div>
+  <table class="responsive-table striped centered mt-30">
+    <thead>
+    <tr>
+      <th data-field="name">Name</th>
+      <th data-field="sport">Sport</th>
+      <th data-field="captain">Capitain</th>
+      <th data-field="action">Action</th>
+    </tr>
+    </thead>
+<% @teams.each do |team| %>
+        <tr>
+          <td><%=team.name%></td>
+          <td><%=team.sport.name%></td>
+          <td><%=team.user.name%></td>
+          <td><%= link_to 'Show', team_path(team.id), class: "btn blue lighten-2" %></td>
+        </tr>
+
+  <% end %>
+  </table>
+</div>

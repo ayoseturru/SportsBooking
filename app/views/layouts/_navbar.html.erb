@@ -1,57 +1,72 @@
 <% if current_user %>
-    <ul id="bookings_dropdown" class="dropdown-content">
-      <li><%= link_to "My bookings", bookings_path %></li>
-      <li><%= link_to "New booking", new_booking_path %></li>
-      <li><%= link_to "New team booking", new_team_bookings_path %></li>
-      <li class="divider"></li>
-      <li><a href="#!">three</a></li>
-    </ul>
-    <ul id="team_dropdown" class="dropdown-content">
-      <li><%= link_to "My Teams", teams_path %></li>
-      <li><%= link_to "Join Team Booking", join_team_booking_bookings_path %></li>
-      <li class="divider"></li>
-      <li><%= link_to "Create team", new_team_path %></li>
-    </ul>
-    <ul id="messages_dropdown" class="dropdown-content  ">
-      <li><%= link_to "New message", new_message_path %></li>
-      <li><%= link_to "Messages", messages_path %></li>
-    </ul>
-    <nav class="blue">
-      <div class="nav-wrapper">
-        <%= link_to image_tag("mysb_logo_8.png"), bookings_path, class: "brand-logo" %>
-        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-        <ul class="right hide-on-med-and-down">
-          <li><%= link_to "Installations", sports_installations_path %></li>
-          <li>
-            <a class="dropdown-button" href="#!" data-activates="team_dropdown">Team<i class="material-icons right">arrow_drop_down</i></a>
-          </li>
-          <li><a href="badges.html">Profile</a></li>
-          <li>
-            <a class="dropdown-button" href="#!" data-activates="messages_dropdown">Messages<i class="material-icons right">arrow_drop_down</i></a>
-          </li>
-          <li>
-            <a class="dropdown-button" href="#!" data-activates="bookings_dropdown">Bookings<i class="material-icons right">arrow_drop_down</i></a>
-          </li>
-          <li>
-            <%= link_to session_path, method: :delete do %>
-                <i class="material-icons">settings_power</i>
-            <% end %>
-          </li>
-        </ul>
-        <ul class="side-nav" id="mobile-demo">
-          <li><a href="sass.html">Sass</a></li>
-          <li><a href="badges.html">Components</a></li>
-          <li><a href="collapsible.html">Javascript</a></li>
-          <li><a href="mobile.html">Mobile</a></li>
-        </ul>
-      </div>
-    </nav>
+<ul id="bookings_dropdown" class="dropdown-content">
+  <li><%= link_to "My bookings", bookings_path %></li>
+  <li><%= link_to "New booking", new_booking_path %></li>
+  <li><%= link_to "New team booking", new_team_bookings_path %></li>
+  <li class="divider"></li>
+  <li><a href="#!">three</a></li>
+</ul>
+<ul id="team_dropdown" class="dropdown-content">
+  <li><%= link_to "My Teams", teams_path %></li>
+  <li><%= link_to "Join Team Booking", join_team_booking_bookings_path %></li>
+  <li class="divider"></li>
+  <li><%= link_to "Create team", new_team_path %></li>
+</ul>
+<ul id="messages_dropdown" class="dropdown-content  ">
+  <li><%= link_to "New message", new_message_path %></li>
+  <li><%= link_to "Messages", messages_path %></li>
+</ul>
+<nav class="blue">
+  <div class="nav-wrapper">
+    <%= link_to image_tag("mysb_logo_8.png"), bookings_path, class: "brand-logo" %>
+    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+    <ul class="right hide-on-med-and-down">
+      <li><%= link_to "Installations", sports_installations_path %></li>
+      <li>
+        <a class="dropdown-button" href="#!" data-activates="team_dropdown">Team<i class="material-icons right">arrow_drop_down</i></a>
+      </li>
+      <li><a href="badges.html">Profile</a></li>
+      <li>
+        <a class="dropdown-button" href="#!" data-activates="messages_dropdown">Messages<i class="material-icons right">arrow_drop_down</i></a>
+      </li>
+      <li>
+        <a class="dropdown-button" href="#!" data-activates="bookings_dropdown">Bookings<i class="material-icons right">arrow_drop_down</i></a>
+      </li>
+      <li>
+        <%= link_to "#" do %>
+        <i onclick="search()" class="material-icons">search</i>
+        <% end %>
+      </li>
 
-    <script type="text/javascript" charset="utf-8">
-      $(document).ready(function () {
-        $(".dropdown-button").dropdown();
-        $(".button-collapse").sideNav();
-      });
-    </script>
+      <li class="search hide">
+        <%= form_tag search_teams_path, method: :get do %>
+        <%= text_field_tag :name, nil, class: 'hidden'%>
+        <% end %>
+      </li>
+
+      <li>
+        <%= link_to session_path, method: :delete do %>
+        <i class="material-icons">settings_power</i>
+        <% end %>
+      </li>
+    </ul>
+    <ul class="side-nav" id="mobile-demo">
+      <li><a href="sass.html">Sass</a></li>
+      <li><a href="badges.html">Components</a></li>
+      <li><a href="collapsible.html">Javascript</a></li>
+      <li><a href="mobile.html">Mobile</a></li>
+    </ul>
+  </div>
+</nav>
+
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function () {
+  $(".dropdown-button").dropdown();
+  $(".button-collapse").sideNav();
+});
+function search(){
+  $(".search").toggleClass('hide show');
+}
+</script>
 
 <% end %>
