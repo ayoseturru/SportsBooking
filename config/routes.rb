@@ -15,10 +15,12 @@ Rails.application.routes.draw do
       post "add_players_from_edit"
       post "leave_team"
       post "delete_image_team"
+      get "search"
     end
   end
 
   resources :users
+
 
   resources :bookings do
     collection do
