@@ -1,6 +1,10 @@
 <div class="container">
   <h3 class="title"><%= @installation.name %></h3>
-  <h5>Sports</h5>
+  <h5>Sports
+    <a href="#map" class="large waves-light">
+      <i class="material-icons">roomm</i>
+    </a>
+  </h5>
   <ul class="collection">
     <% @sports.each do |sport| %>
         <li class="collection-item avatar">
@@ -60,7 +64,18 @@
         </div>
     <% end %>
   </div>
+  <br>
+  <h3 class="center">
+    Map
+    <a href="#" name="map" class="large waves-light">
+      <i class="material-icons">room</i>
+    </a>
+  </h3>
+  <div class="row">
+    <iframe class="col s12" style="display: block; margin: 0 auto" src="<%= @installation.map_url %>" width="auto" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+  </div>
 </div>
+
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function () {
     $('.carousel').carousel();

@@ -1,10 +1,10 @@
 require 'date'
 require 'digest'
 
-sports_center_installation = Installation.create(name: "Sports Center", address: "Campus Universitario de Tafira", images: "sports_centers_1,sports_centers_2,sports_centers_3")
-outdoor_football_installation = Installation.create(name: "Outdoor Court", address: "Campus Universitario de Tafira", images: "outdoor_court_1,outdoor_court_2")
-football_stadium = Installation.create(name: "ULPGC Football Stadium", address: "Campus Universitario de Tafira", images: "football_stadium_1,football_stadium_2,football_stadium_3")
-basketball_outdoor= Installation.create(name: "Basketball Outdoor Court", address: "Campus Universitario de Tafira", images: "basketball_outdoor_1,basketball_outdoor_2,basketball_outdoor_3")
+sports_center_installation = Installation.create(name: "Sports Center", address: "Campus Universitario de Tafira", images: "sports_centers_1,sports_centers_2,sports_centers_3", map_url: "https://www.google.com/maps/embed?pb=!1m0!3m2!1ses!2ses!4v1461055363647!6m8!1m7!1s4P-ozm_lVhCUOq-7TqJN4g!2m2!1d28.06860433735539!2d-15.45551653099488!3f285.2632814355912!4f-8.543636159967107!5f0.7820865974627469")
+outdoor_football_installation = Installation.create(name: "Outdoor Court", address: "Campus Universitario de Tafira", images: "outdoor_court_1,outdoor_court_2", map_url: "https://www.google.com/maps/embed?pb=!1m0!3m2!1ses!2ses!4v1461054193992!6m8!1m7!1s0RvE4C30Ln0Zl7S9WFfEcw!2m2!1d28.07096325667804!2d-15.45631463438623!3f309.88741509755863!4f-10.359925153472062!5f0.7820865974627469")
+football_stadium = Installation.create(name: "ULPGC Football Stadium", address: "Campus Universitario de Tafira", images: "football_stadium_1,football_stadium_2,football_stadium_3", map_url: "https://www.google.com/maps/embed?pb=!1m0!3m2!1ses!2ses!4v1461054193992!6m8!1m7!1s0RvE4C30Ln0Zl7S9WFfEcw!2m2!1d28.07096325667804!2d-15.45631463438623!3f309.88741509755863!4f-10.359925153472062!5f0.7820865974627469")
+basketball_outdoor= Installation.create(name: "Basketball Outdoor Court", address: "Campus Universitario de Tafira", images: "basketball_outdoor_1,basketball_outdoor_2,basketball_outdoor_3", map_url: "https://www.google.com/maps/embed?pb=!1m0!3m2!1ses!2ses!4v1461055363647!6m8!1m7!1s4P-ozm_lVhCUOq-7TqJN4g!2m2!1d28.06860433735539!2d-15.45551653099488!3f285.2632814355912!4f-8.543636159967107!5f0.7820865974627469")
 
 indoor_football = Sport.create(name: "Futsal", max_players: 10, installations: [sports_center_installation, outdoor_football_installation])
 football_seven_a_side = Sport.create(name: "Football Seven-a-side", max_players: 14, installations: [football_stadium])
