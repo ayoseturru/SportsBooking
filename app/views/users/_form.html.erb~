@@ -31,7 +31,7 @@
 
           <div class="center-align" id="buttons_zone" >
 				<div class="field">
-		         <%= f.file_field :image, id: "user_image", style: "display: none" %>
+		         <%= f.file_field :image, style: "display: none" %>
 		         <a id="triggerFile" class="waves-effect waves-light btn"><i class="material-icons left">picture_in_picture</i>Image</a>
 				</div>
             <br><br>
@@ -46,12 +46,3 @@
     </div>
   </div>
 </div>
-
-<script>
-	$(document).ready(function() {
-		$('#triggerFile').on('click', function (e) {
-			e.preventDefault();
-			$("#user_image").trigger('click');
-		});
-	});
-</script>

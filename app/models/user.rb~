@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   has_many :users_teams
   has_many :messages
   has_many :teams, :through => :users_teams
-  has_attached_file :image, styles: { large: "600*600>", medium: "300x300>", thumb: "125x125>" }, default_url: "/default_profile.jpg"
+  has_attached_file :image, styles: { large: "600*600>", medium: "300x300>", thumb: "125x125>" }
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
   def self.authenticate(dni, password)

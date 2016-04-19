@@ -18,7 +18,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users
+  resources :users do
+    collection do
+      get 'badge'
+    end
+  end
 
   resources :bookings do
     collection do
