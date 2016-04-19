@@ -24,6 +24,16 @@ class MessagesController < ApplicationController
   def edit
   end
 
+  def hide_sender
+    Message.find(params[:message]).update(show_sender: false)
+    redirect_to messages_path, notice: 'Message was successfully deleted.'
+  end
+
+  def hide_delivered
+    Message.find(params[:message]).update(show_recipient: false)
+    redirect_to messages_path, notice: 'Message was successfully deleted.'
+  end
+
   # POST /messages
   # POST /messages.json
   def create

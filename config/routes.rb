@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   resources :comments
-  resources :messages
+  resources :messages do
+    collection do
+      put "hide_sender"
+      put "hide_delivered"
+    end
+  end
   root 'sessions#welcome'
 
   resource :session, only: [:new, :create, :destroy] do

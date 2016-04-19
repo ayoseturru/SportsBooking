@@ -4,40 +4,50 @@
 
   <ul class="collection">
     <% @messages.each do |message| %>
-        <li class="collection-item avatar">
-          <%= link_to User.find(message.sender) do %>
-              <%= image_tag "/default_profile.jpg", class: "circle" %>
-          <% end %>
-          <span class="title"><%= User.find(message.sender).name %>
-            , <b>dni:</b><%= User.find(message.sender).dni %></span>
-          <p>
-            <%= message.content %> <br>
-            <%= message.date.split("+")[0] %>
-          </p>
-          <%= link_to new_message_path(user: User.find(message.sender).dni), class: "secondary-content" do %>
-              <i class="material-icons">chat_bubble</i>
-          <% end %>
-        </li>
+        <% if message.show_recipient %>
+            <li class="collection-item avatar" id="<%= message.id %>">
+              <%= link_to User.find(message.sender) do %>
+                  <%= image_tag "/default_profile.jpg", class: "circle" %>
+              <% end %>
+              <span class="title"><%= User.find(message.sender).name %>
+                , <b>dni:</b><%= User.find(message.sender).dni %></span>
+              <p>
+                <%= message.content %> <br>
+                <%= message.date.split("+")[0] %>
+              </p>
+              <%= link_to new_message_path(user: User.find(message.sender).dni), class: "secondary-content" do %>
+                  <i class="material-icons">chat_bubble</i>
+              <% end %>
+              <%= link_to hide_delivered_messages_path(message: message.id), method: :put, class: "btn-floating red" do %>
+                  <i class="material-icons">delete</i>
+              <% end %>
+            </li>
+        <% end %>
     <% end %>
   </ul>
 
   <h4 class="title">Listing sended messages</h4>
   <ul class="collection">
     <% @messages_sended.each do |message| %>
-        <li class="collection-item avatar">
-          <%= link_to User.find(message.user) do %>
-              <%= image_tag "/default_profile.jpg", class: "circle" %>
-          <% end %>
-          <span class="title"><%= message.user.name %>
-            , <b>dni: </b> <%= message.user.dni %></span>
-          <p>
-            <%= message.content %> <br>
-            <%= message.date.split("+")[0] %>
-          </p>
-          <%= link_to new_message_path(user: message.user.dni), class: "secondary-content" do %>
-              <i class="material-icons">chat_bubble</i>
-          <% end %>
-        </li>
+        <% if message.show_sender %>
+            <li class="collection-item avatar" id="<%= message.id %>">
+              <%= link_to User.find(message.user) do %>
+                  <%= image_tag "/default_profile.jpg", class: "circle" %>
+              <% end %>
+              <span class="title"><%= message.user.name %>
+                , <b>dni: </b> <%= message.user.dni %></span>
+              <p>
+                <%= message.content %> <br>
+                <%= message.date.split("+")[0] %>
+              </p>
+              <%= link_to new_message_path(user: message.user.dni), class: "secondary-content" do %>
+                  <i class="material-icons">chat_bubble</i>
+              <% end %>
+              <%= link_to hide_sender_messages_path(message: message.id), method: :put, class: "btn-floating red" do %>
+                  <i class="material-icons">delete</i>
+              <% end %>
+            </li>
+        <% end %>
     <% end %>
   </ul>
 

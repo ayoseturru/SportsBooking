@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160418174954) do
+ActiveRecord::Schema.define(version: 20160419080052) do
 
   create_table "bookings", force: :cascade do |t|
     t.integer  "sports_installation_id"
@@ -50,9 +50,11 @@ ActiveRecord::Schema.define(version: 20160418174954) do
     t.string   "content"
     t.integer  "user_id"
     t.integer  "sender"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.string   "date"
+    t.boolean  "show_sender"
+    t.boolean  "show_recipient"
   end
 
   create_table "sports", force: :cascade do |t|
