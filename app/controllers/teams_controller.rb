@@ -141,7 +141,7 @@ class TeamsController < ApplicationController
 
   # SEARCH /teams
   def search
-     @teams=Team.where("name LIKE ?", "%#{params[:name]}")
+     @teams=Team.where("name LIKE ?", "%#{params[:name]}%")
   end
 
   private
