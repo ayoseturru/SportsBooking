@@ -30,6 +30,7 @@ class TeamsController < ApplicationController
 
   # GET /teams/1/edit
   def edit
+    access_denied unless @team.user == current_user
   end
 
   def add_players_from_edit
@@ -101,7 +102,7 @@ class TeamsController < ApplicationController
     @team.users.delete(User.find_by_id(params[:player_id]))
 
     respond_to do |format|
-      format.html { redirect_to teams_url }
+      format.html { redirect_to teams_url, notice: 'You left the team successfully.' }
       format.json { head :no_content }
     end
   end

@@ -34,11 +34,16 @@
     <% @installation.comments.each do |comment| %>
         <li class="collection-item avatar">
           <%= link_to User.find_by_id(comment.user.id) do %>
-              <%= image_tag "/default_profile.jpg", class: "circle" %>
+              <%= image_tag comment.user.image.url(:thumb), class: "circle"%>
           <% end %>
-          <span class="title"><%= User.find_by_id(comment.user.id).name %>
-            , <b>dni:</b><%= User.find_by_id(comment.user.id).dni %></span>
+          <span class="title"><%= comment.user.name %>
+            , <b>dni:</b><%= comment.user.dni %></span>
           <p>
+            <% if current_user == comment.user %>
+                <%= link_to edit_comment_path(comment), class: "secondary-content" do %>
+                    <i class="material-icons">chat_bubble</i>
+                <% end %>
+            <% end %>
             <%= comment.comment %>
           </p>
         </li>
@@ -54,7 +59,7 @@
         </div>
         <div class="input-field">
           <%= f.label :comment %><br>
-          <%= f.text_area :comment, class: "materialize-textarea" %>
+          <%= f.text_area :comment, class: "materialize-textarea", :required => true %>
         </div>
         <div class="actions">
           <button class="btn waves-effect waves-light blue lighten-1" type="submit" name="action">

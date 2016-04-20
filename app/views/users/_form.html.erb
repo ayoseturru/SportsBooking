@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col s3 offset-s2">
-      <%= form_for(@user) do |f| %>
+      <%= form_for(@user, html: {multipart: true}) do |f| %>
           <% if @user.errors.any? %>
               <div id="error_explanation">
                 <h2><%= pluralize(@user.errors.count, "error") %> prohibited this team from being saved:</h2>
@@ -29,10 +29,11 @@
             <%= f.text_field :password %>
           </div>
 
-
-          <div class="center-align" id="buttons_zone" >
-            <%= f.file_field :image, style: "display: none" %>
-            <a id="triggerFile" class="waves-effect waves-light btn"><i class="material-icons left">picture_in_picture</i>Image</a>
+          <div class="center-align" id="buttons_zone">
+            <div class="field">
+              <%= f.file_field :image, id: "user_image", style: "display: none" %>
+              <a id="triggerFile" class="waves-effect waves-light btn"><i class="material-icons left">picture_in_picture</i>Image</a>
+            </div>
             <br><br>
             <div class="actions">
               <button class="btn waves-effect waves-light blue lighten-1" type="submit" name="action">
@@ -45,3 +46,12 @@
     </div>
   </div>
 </div>
+
+<script>
+  $(document).ready(function () {
+    $('#triggerFile').on('click', function (e) {
+      e.preventDefault();
+      $("#user_image").trigger('click');
+    });
+  });
+</script>

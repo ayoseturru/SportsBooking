@@ -1,6 +1,12 @@
-<h1>Editing Comment</h1>
+<div class="container">
 
-<%= render 'form' %>
+  <h1>Editing Comment from <%= @comment.installation.name %></h1>
 
-<%= link_to 'Show', @comment %> |
-<%= link_to 'Back', comments_path %>
+  <%= render 'form' %>
+
+  <div>
+    <%= link_to @comment.installation do %>
+        <i class="material-icons">settings_backup_restore</i>
+    <% end %>
+  </div>
+</div>

@@ -151,8 +151,10 @@
     </script>
 
     <script>
-      $('#triggerFile').on('click', function (e) {
-        e.preventDefault()
-        $("#team_image").trigger('click')
+      $(document).ready(function () {
+        $('#triggerFile').on('click', function (e) {
+          e.preventDefault();
+          $("#team_image").trigger('click');
+        });
       });
     </script>

@@ -35,10 +35,11 @@ mock_time_band(Time.now.month, Time.days_in_month(Time.now.month, Time.now.year)
 
 test_user = User.create(dni: "test", name: "Elric", password: Digest::SHA1.hexdigest("12345678"))
 test1_user = User.create(dni: "test1", name: "Alfonso", password: Digest::SHA1.hexdigest("12345678"))
-test1_user = User.create(dni: "test2", name: "Dante", password: Digest::SHA1.hexdigest("12345678"))
+test2_user = User.create(dni: "test2", name: "Dante", password: Digest::SHA1.hexdigest("12345678"))
+test3_user = User.create(dni: "test3", name: "Asmodeus", password: Digest::SHA1.hexdigest("12345678"))
 
-teams = [Team.create(name: "football", sport_id: 1, user: test_user),
-         Team.create(name: "basketball", sport_id: 2, user: test_user)]
+teams = [Team.create(name: "football", sport_id: 1, user_id: test_user.id),
+         Team.create(name: "basketball", sport_id: 2, user_id: test_user.id)]
 
 test_user.update(teams: teams)
 
