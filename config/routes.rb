@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   resources :users do
     collection do
       get 'badge'
+      get 'search'
     end
   end
 
@@ -50,6 +51,12 @@ Rails.application.routes.draw do
 
   resources :time_bands
   resources :sports_installations
-  resources :sports
+
+  resources :sports do
+    collection do
+      get 'search'
+    end
+  end
+
   resources :installations
 end
