@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   end
 
   def access_denied
-    flash[:notice] = "Por favor, inicie sesión"
+    flash[:notice] = "Please, log in"
     redirect_to root_url
     return false
   end

@@ -7,7 +7,7 @@
         <% if message.show_recipient %>
             <li class="collection-item avatar" id="<%= message.id %>">
               <%= link_to User.find(message.sender) do %>
-                  <%= image_tag "/default_profile.jpg", class: "circle" %>
+                  <%= image_tag User.find(message.sender).image.url(:thumb), class: "circle" %>
               <% end %>
               <span class="title"><%= User.find(message.sender).name %>
                 , <b>dni:</b><%= User.find(message.sender).dni %></span>
@@ -32,7 +32,7 @@
         <% if message.show_sender %>
             <li class="collection-item avatar" id="<%= message.id %>">
               <%= link_to User.find(message.user) do %>
-                  <%= image_tag "/default_profile.jpg", class: "circle" %>
+                  <%= image_tag User.find(message.user).image.url(:thumb), class: "circle" %>
               <% end %>
               <span class="title"><%= message.user.name %>
                 , <b>dni: </b> <%= message.user.dni %></span>

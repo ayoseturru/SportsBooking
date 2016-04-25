@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
   has_many :messages
   has_many :comments
   has_many :teams, :through => :users_teams
+  has_attached_file :image, styles: { large: "500x500>", medium: "250x250>", thumb: "125x125>" }, default_url: "/default_profile.jpg"
+  validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
   def self.authenticate(dni, password)
     user = find_by_dni(dni)
