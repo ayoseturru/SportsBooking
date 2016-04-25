@@ -8,7 +8,7 @@ basketball_outdoor= Installation.create(name: "Basketball Outdoor Court", addres
 
 indoor_football = Sport.create(name: "Futsal", max_players: 10, installations: [sports_center_installation, outdoor_football_installation])
 football_seven_a_side = Sport.create(name: "Football Seven-a-side", max_players: 14, installations: [football_stadium])
-football = Sport.create(name: "Football", max_players: 22, installations: [football_stadium], )
+football = Sport.create(name: "Football", max_players: 22, installations: [football_stadium])
 basketball = Sport.create(name: "Basketball", max_players: 10, installations: [sports_center_installation, basketball_outdoor])
 
 
