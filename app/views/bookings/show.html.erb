@@ -1,67 +1,95 @@
 <div class="container">
-  <div class="row col s6">
-    <p id="notice"><%= notice %></p>
+  <div class="row col s12">
     <div class="col s12 valign-wrapper mt-30">
-      <div class="col s5">
-        <p>
-          <strong>Sports installation:</strong>
-          <%= Installation.find_by_id(@booking.sports_installation.installation_id).name %>
-        </p>
-      </div>
-      <div class="col s3">
-        <p>
-          <strong>Date:</strong>
-          <%= @booking.time_band.date %>
-        </p>
-      </div>
-      <div class="col s4">
-        <p>
-          <strong>Time band:</strong>
-          <%= @booking.time_band.start_hour %> to  <%= @booking.time_band.end_hour %>
-        </p>
-      </div>
+
+      <table class="highlight responsive-table">
+        <thead>
+        <tr>
+          <th data-field="sport">Sport Installation</th>
+          <th data-field="icon"><i class="blue-text material-icons">today</i></th>
+          <th data-field="icon0"><i class="blue-text material-icons">query_builder</i></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+          <td><%= Installation.find_by_id(@booking.sports_installation.installation_id).name %></td>
+          <td><%= @booking.time_band.date %></td>
+          <td> <%= @booking.time_band.start_hour %> to  <%= @booking.time_band.end_hour %></td>
+        </tr>
+        </tbody>
+      </table>
     </div>
-
-    <div class="col s10 valign">
-      <% if @booking.local_team != -1 %>
-          <% if current_user.id == Team.find_by_id(@booking.local_team).user_id %>
-              <%= link_to 'Remove team from booking', delete_team_from_booking_bookings_path(id: @booking.id), method: :post, class: "btn red ", data: {confirm: 'Are you sure? The booking will be removed.'} %>
-          <% end %>
-      <% end %>
-
-      <% if @booking.away_team != -1 %>
-          <% if current_user.id == Team.find_by_id(@booking.away_team).user_id %>
-              <%= link_to 'Remove team from booking', delete_team_from_booking_bookings_path(id: @booking.id), method: :post, class: "btn red", data: {confirm: 'Team removed'} %>
-          <% end %>
-      <% end %>
-
-    </div>
-
-    <row>
-        <% if @booking.max_size > 0 %>
-            <ul class="collection with-header col s4 offset-s4 valign mt-30">
-              <li class="collection-header"><h4>Participants:</h4></li>
-              <% @booking.participants.split(',').each do |participant| %>
-                  <!--href to user profile-->
-                    <div>
-                      <li class="collection-item col s12">
-                      <!--link to user profile-->
-                      <%= link_to User.find_by_dni(participant).name, user_path(User.find_by_dni(participant)) %>
-                      <% if User.find_by_dni(participant) == current_user %>
-                          <%= link_to '<i class="black-text material-icons icon-trf ">delete</i>'.html_safe, exit_free_booking_bookings_path(id: @booking.id), method: :post, data: {confirm: 'Are you sure?'}, class: "secondary-content" %>
-                      <% end %>
-                        <div class="divider col s12">
-                        </div>
-                      </li>
-                    </div>
+    <div>
+      <div class="col s12 m6">
+        <% if @booking.local_team != -1 %>
+            <ul class="collection">
+              <li class="collection-item center-align"><h5 class="center-align">Local Team</h5></li>
+              <% Team.find_by_id(@booking.local_team).users.each do |member| %>
+                  <li class="collection-item avatar">
+                    <%= link_to member do %>
+                        <%= image_tag member.image.url(:thumb), class: "circle" %>
+                    <% end %>
+                    <p class="collection-item"><%= member.name %></p>
+                  </li>
               <% end %>
+            </ul>
         <% end %>
-        </ul>
-    </row>
-  <div class="center-align col s4 offset-s4">
-    <%= link_to 'Edit', edit_booking_path(@booking), class: "btn blue lighten-2" unless !@booking.owned_by?(current_user) %>
-    <%= link_to 'Back', bookings_path, class: "btn blue lighten-2" %>
-  </div>
-
+        <% if @booking.local_team != -1 %>
+            <% if current_user.id == Team.find_by_id(@booking.local_team).user_id %>
+                <%= link_to 'Remove team from booking', delete_team_from_booking_bookings_path(id: @booking.id), style: "margin-bottom: 5px", method: :post, class: "btn red col s12 m6 ", data: {confirm: 'Are you sure? The booking will be removed.'} %>
+            <% end %>
+        <% end %>
+      </div>
+      <div class="col s12 m6">
+        <% if @booking.away_team != -1 %>
+            <ul class="collection">
+              <li class="collection-item center-align"><h5 class="center-align">Away Team</h5></li>
+              <% Team.find_by_id(@booking.away_team).users.each do |member| %>
+                  <li class="collection-item avatar">
+                    <%= link_to member do %>
+                        <%= image_tag member.image.url(:thumb), class: "circle" %>
+                    <% end %>
+                    <p class="collection-item"><%= member.name %></p>
+                  </li>
+              <% end %>
+            </ul>
+        <% end %>
+        <% if @booking.away_team != -1 %>
+            <% if current_user.id == Team.find_by_id(@booking.away_team).user_id %>
+                <%= link_to 'Remove team from booking', delete_team_from_booking_bookings_path(id: @booking.id), style: "margin-bottom: 5px", method: :post, class: "btn red col s12 m6", data: {confirm: 'Team removed'} %>
+            <% end %>
+        <% end %>
+        <br>
+        <br>
+      </div>
+    </div>
+    <% if @booking.max_size > 0 %>
+        <ul class="collection with-header col s10 offset-s1 valign mt-30">
+          <li class="collection-header"><h4>Participants:</h4></li>
+          <% @booking.participants.split(',').each do |participant| %>
+              <!--href to user profile-->
+              <div>
+                <li class="collection-item col s12">
+                  <!--link to user profile-->
+                  <row>
+                    <%= link_to User.find_by_dni(participant).name, user_path(User.find_by_dni(participant)) %>
+                    <% if User.find_by_dni(participant) == current_user %>
+                        <%= link_to '<i class="black-text material-icons icon-trf ">delete</i>'.html_safe, exit_free_booking_bookings_path(id: @booking.id), method: :post, data: {confirm: 'Are you sure?'}, class: "secondary-content" %>
+                    <% end %>
+                  </row>
+                  <div class="divider col s12">
+                  </div>
+                </li>
+              </div>
+          <% end %>
+    <% end %>
+    </ul>
+    <div class="center-align col s12">
+      <row class="col s12 valign">
+          <%= link_to 'Edit', edit_booking_path(@booking), class: "btn blue lighten-2 s5", style: "margin-bottom: 5px" unless !@booking.owned_by?(current_user) %>
+          <%= link_to 'Back', bookings_path, class: "btn blue lighten-2 s6", style: "margin-bottom: 5px" %>
+      </row>
+    </div>
   </div>
 </div>

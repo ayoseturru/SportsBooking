@@ -88,7 +88,7 @@ class BookingsController < ApplicationController
   end
 
   def create_team
-    if new_team_booking_params_sended?
+    if new_team_booking_params_sent?
       sport_installation = SportsInstallation.where(sport_id: params[:sport], installation_id: params[:installation]).first
       @booking = current_user.bookings.new(sports_installation_id: sport_installation.id, time_band_id: params[:time_band_id], local_team: params[:team_id], max_size: 0)
       if @booking.save
@@ -127,7 +127,7 @@ class BookingsController < ApplicationController
   end
 
   def add_team_to_existing
-    if add_team_to_existing_booking_params_sended?
+    if add_team_to_existing_booking_params_sent?
       Booking.find(params[:booking_id]).update(away_team: params[:team_id])
       redirect_to bookings_path, notice: "Your team was successfully added to the booking..."
     else
@@ -196,11 +196,11 @@ class BookingsController < ApplicationController
     return (params[:date] and params[:sport] != "" and params[:installation] != "" and params[:time_band_id]) ? true : false
   end
 
-  def new_team_booking_params_sended?
+  def new_team_booking_params_sent?
     return new_booking_params_sended? && (params[:team_id] != "")
   end
 
-  def add_team_to_existing_booking_params_sended?
+  def add_team_to_existing_booking_params_sent?
     params[:booking_id] != "" && params[:team_id] != ""
   end
 
@@ -221,6 +221,6 @@ class BookingsController < ApplicationController
     end
   end
 
-  protected :extract_date_from_params, :new_booking_params_sended?, :new_team_booking_params_sended?, :new_team_booking_params_sended?, :owned
+  protected :extract_date_from_params, :new_booking_params_sended?, :new_team_booking_params_sent?, :new_team_booking_params_sent?, :owned
   private :set_booking
 end
