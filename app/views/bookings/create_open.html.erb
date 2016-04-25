@@ -1,0 +1,85 @@
+
+<%= form_tag create_open_bookings_path, novalidate: true do %>
+    <h1 class="center-align">New Open Booking</h1>
+    <div class="col s12">
+      <div class="row">
+        <div class="input-field col s6">
+          <%= select_tag "sport", options_from_collection_for_select(@sports, "id", "name"), prompt: "Choose a sport", required: true %>
+          <label for="sport">Sport</label>
+        </div>
+        <div class="input-field col s6 installation">
+          <%= select_tag "installation", options_from_collection_for_select(Installation.all, "id", "name"), class: "installation", prompt: "Choose a installation", required: true %>
+          <label for="installation">Installation</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="col s12">
+      <div class="row">
+        <div class="input-field col s12 m5">
+          <input name="date" id="date" type="date" class="datepicker" required>
+          <label for="date">Date</label>
+          <button class="col s3 btn waves-effect waves-light" type="submit" name="action">Book!
+            <i class="material-icons right">send</i>
+          </button>
+        </div>
+        <div class="col s12 col m7" id="free_hours_table">
+        </div>
+      </div>
+    </div>
+    <input type="hidden" id="time_band_id" name="time_band_id">
+
+<% end %>
+
+
+
+
+
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function () {
+    $('.modal-trigger').leanModal();
+    $("#sport").on("change", function () {
+      if ($('#sport').children(":selected").attr("value")) {
+        $.ajax({
+          url: "/bookings/installation_options",
+          method: "GET",
+          data: {
+            sport_id: $('#sport').children(":selected").attr("value")
+          }
+        });
+      }
+    });
+
+    $('.datepicker').pickadate({
+      selectMonths: false, // Creates a dropdown to control month
+      selectYears: false, // Creates a dropdown of 15 years to control year
+      min: new Date()
+    });
+
+    function free_hours_request() {
+      $.ajax({
+        url: "/bookings/free_hours_table",
+        type: "GET",
+        data: {
+          date: $("#date").val(),
+          sport_id: $('#sport').children(":selected").attr("value"),
+          installation_id: $('#installation').children(":selected").attr("value")
+        }
+      });
+    }
+
+    $("#date").on("change", function () {
+      if ($('#installation').children(":selected").attr("value") && $('#sport').children(":selected").attr("value")) {
+        free_hours_request();
+      }
+    });
+
+    function clearDate() {
+      $("#free_hours_table").html("");
+      $("#date").val("");
+    }
+
+    $("#sport").on("change", clearDate);
+    $('select').material_select();
+  });
+</script>

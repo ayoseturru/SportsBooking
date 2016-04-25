@@ -1,6 +1,6 @@
 require 'date'
 class BookingsController < ApplicationController
-  before_action :set_booking, only: [:show, :edit, :update, :destroy, :delete_team_from_booking, :exit_free_booking]
+  before_action :set_booking, only: [:show, :edit, :update, :destroy, :delete_team_from_booking, :exit_free_booking ]
   before_action :authenticate
   before_action :owned, only: [:edit]
 
@@ -29,6 +29,13 @@ class BookingsController < ApplicationController
     @booking = Booking.new
     @sports = Sport.all
     render :new
+  end
+
+
+  def new_open
+      @booking = Booking.new
+      @sports = Sport.all
+      render create_open_bookings_path
   end
 
   def edit
@@ -93,6 +100,21 @@ class BookingsController < ApplicationController
       redirect_to new_team_bookings_path, alert: "Make you sure you have selected a sport, a installation, a team and a time band..."
     end
   end
+
+  def create_open
+    if new_booking_params_sended?
+      sport_installation = SportsInstallation.where(sport_id: params[:sport], installation_id: params[:installation]).first
+      @booking = current_user.bookings.new(sports_installation_id: sport_installation.id, time_band_id: params[:time_band_id], local_team: params[:team_id], max_size: Sport.find_by_id(params[:sport]).max_players, participants: "#{current_user.dni}")
+      if @booking.save
+        redirect_to bookings_path, notice: "Open Booking was successfully created"
+      else
+        redirect_to :new
+      end
+    else
+      redirect_to new_open_bookings_path, alert: "Make you sure you have selected a sport, a installation,  and a time band..."
+    end
+  end
+
 
   def set_team_id
     respond_to do |format|

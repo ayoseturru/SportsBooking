@@ -38,6 +38,8 @@ Rails.application.routes.draw do
       get 'installation_options'
       get 'free_hours_table'
       get 'new_team'
+      get 'new_open'
+      post 'create_open'
       post 'create_team'
       get 'set_team_id'
       get 'join_team_booking'

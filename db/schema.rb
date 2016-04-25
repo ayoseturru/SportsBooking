@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160419083543) do
+ActiveRecord::Schema.define(version: 20160425000645) do
 
   create_table "bookings", force: :cascade do |t|
     t.integer  "sports_installation_id"
