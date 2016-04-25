@@ -1,6 +1,7 @@
 <% if current_user %>
 <ul id="bookings_dropdown" class="dropdown-content">
   <li><%= link_to "My bookings", bookings_path %></li>
+  <li><%= link_to "New open booking", new_open_bookings_path %></li>
   <li><%= link_to "New booking", new_booking_path %></li>
   <li><%= link_to "New team booking", new_team_bookings_path %></li>
   <li class="divider"></li>
