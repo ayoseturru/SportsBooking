@@ -26,6 +26,7 @@
     <% @users.each do |user| %>
         <tr>
           <td><%=user.name%></td>
+          <td><%= link_to 'Show', user_path(user.id), class: "btn blue lighten-2" %></td>
         </tr>
 
     <% end %>
