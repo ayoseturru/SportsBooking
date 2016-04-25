@@ -28,6 +28,7 @@
         <tr>
           <td><%=sport.name%></td>
           <td><%=sport.max_players%></td>
+          <td><%= link_to 'Show', sport_path(sport.id), class: "btn blue lighten-2" %></td>
         </tr>
 
     <% end %>
