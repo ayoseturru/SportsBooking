@@ -14,5 +14,23 @@
     </div>
     <% end %>
     </div>
+
   </div>
+<div class=" row ">
+  <table class="responsive-table striped centered col s6 offset-s3 mt-30">
+    <thead>
+    <tr>
+      <th data-field="name">Name</th>
+      <th data-field="max_player">max_player</th>
+    </tr>
+    </thead>
+    <% @sports.each do |sport| %>
+        <tr>
+          <td><%=sport.name%></td>
+          <td><%=sport.max_players%></td>
+        </tr>
+
+    <% end %>
+  </table>
+</div>
 </div>
