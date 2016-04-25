@@ -67,7 +67,7 @@ class UsersController < ApplicationController
   end
 
 def search
- @user= User.where("name LIKE ?", "%#{params[:name]}")
+ @users = User.where("name LIKE ?", "%#{params[:name]}%")
 end
 
   private

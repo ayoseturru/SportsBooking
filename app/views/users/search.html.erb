@@ -15,4 +15,20 @@
     <% end %>
     </div>
   </div>
+
+  <div class="row">
+  <table class="responsive-table striped centered col s6 offset-s3 mt-30">
+    <thead>
+    <tr>
+      <th data-field="name">Name</th>
+    </tr>
+    </thead>
+    <% @users.each do |user| %>
+        <tr>
+          <td><%=user.name%></td>
+        </tr>
+
+    <% end %>
+  </table>
+  </div>
 </div>
