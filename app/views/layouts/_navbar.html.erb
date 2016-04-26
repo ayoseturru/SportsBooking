@@ -19,7 +19,7 @@
 </ul>
 <ul id="search_dropdown" class="dropdown-content  ">
   <li><%= link_to "Search User", search_users_path %></li>
-  <li><%= link_to "Search Sport", search_sports_path %></li>
+  <li><%= link_to "Search by Sport", search_sports_path %></li>
 </ul>
 
 <nav class="blue">
@@ -62,10 +62,17 @@
       </li>
     </ul>
     <ul class="side-nav" id="mobile-demo">
-      <li><a href="sass.html">Sass</a></li>
-      <li><a href="badges.html">Components</a></li>
-      <li><a href="collapsible.html">Javascript</a></li>
-      <li><a href="mobile.html">Mobile</a></li>
+      <li><%= link_to "My bookings", bookings_path %></li>
+      <li><%= link_to "New open booking", new_open_bookings_path %></li>
+      <li><%= link_to "New booking", new_booking_path %></li>
+      <li><%= link_to "New team booking", new_team_bookings_path %></li>
+      <li><%= link_to "My Teams", teams_path %></li>
+      <li><%= link_to "Create team", new_team_path %></li>
+      <li><%= link_to "Join Team Booking", join_team_booking_bookings_path %></li>
+      <li><%= link_to "New message", new_message_path %></li>
+      <li><%= link_to "Messages", messages_path %></li>
+      <li><%= link_to "Search User", search_users_path %></li>
+      <li><%= link_to "Search by Sport", search_sports_path %></li>
     </ul>
   </div>
 </nav>
