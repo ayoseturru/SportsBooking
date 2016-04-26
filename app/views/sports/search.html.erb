@@ -4,7 +4,7 @@
     <%= form_tag search_sports_path, method: :get do %>
     <div class="input-field col s12">
       <%= text_field_tag :name, nil, :placeholder => "Search name sport", class: 'hidden'%>
-      <%= label_tag 'Nombre', :Name, data: {success: 'right'}, class: "center-align" %>
+      <%= label_tag 'Nombre', :name, data: {success: 'right'}, class: "center-align" %>
     </div>
 
     <div class="actions margin">
@@ -16,22 +16,28 @@
     </div>
 
   </div>
-<div class=" row ">
-  <table class="responsive-table striped centered col s6 offset-s3 mt-30">
-    <thead>
-    <tr>
-      <th data-field="name">Name</th>
-      <th data-field="max_player">max_player</th>
-    </tr>
-    </thead>
-    <% @sports.each do |sport| %>
+  <% if @teams.length != 0 %>
+      <div>
+        <h3 class="center">Search</h3>
+      </div>
+      <table class="responsive-table striped centered mt-30">
+        <thead>
         <tr>
-          <td><%=sport.name%></td>
-          <td><%=sport.max_players%></td>
-          <td><%= link_to 'Show', sport_path(sport.id), class: "btn blue lighten-2" %></td>
+          <th data-field="name">Name</th>
+          <th data-field="sport">Sport</th>
+          <th data-field="captain">Captain</th>
+          <th data-field="action">Action</th>
         </tr>
+        </thead>
+        <% @teams.each do |team| %>
+            <tr>
+              <td><%=team.name%></td>
+              <td><%=team.sport.name%></td>
+              <td><%=team.user.name%></td>
+              <td><%= link_to 'Show', team_path(team.id), class: "btn blue lighten-2" %></td>
+            </tr>
 
-    <% end %>
-  </table>
-</div>
+        <% end %>
+      </table>
+  <% end %>
 </div>
