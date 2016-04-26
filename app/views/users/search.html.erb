@@ -16,7 +16,8 @@
     </div>
   </div>
 
-  <div class="row">
+  <% if @users.length != 0 %>
+<div class="row">
   <table class="responsive-table striped centered col s6 offset-s3 mt-30">
     <thead>
     <tr>
@@ -32,4 +33,5 @@
     <% end %>
   </table>
   </div>
+      <% end %>
 </div>

@@ -63,6 +63,19 @@ class SportsController < ApplicationController
 
 def search
   @sports = Sport.where("name LIKE ?", "%#{params[:name]}%")
+
+  @teams = []
+
+  @sports.each do |sport|
+    aux = Team.where("sport_id LIKE ?", sport.id)
+    aux.each do |team|
+      @teams.push team
+    end
+  end
+
+
+
+
 end
   private
     # Use callbacks to share common setup or constraints between actions.
