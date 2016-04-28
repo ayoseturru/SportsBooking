@@ -132,9 +132,11 @@ class TeamsController < ApplicationController
   end
 
   def delete_image_team
-    @team = Team.find(params[:id])
+    @team = Team.find_by_id(params[:id])
+    if @team != nil
     @team.image = nil
     @team.save
+    end
     respond_to do |format|
       format.js
     end
@@ -142,7 +144,7 @@ class TeamsController < ApplicationController
 
   # SEARCH /teams
   def search
-     @teams=Team.where("name LIKE ?", "%#{params[:name]}%")
+    @teams=Team.where("name LIKE ?", "%#{params[:name]}%")
   end
 
   private

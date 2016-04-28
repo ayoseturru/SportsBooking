@@ -35,7 +35,7 @@
               </div>
           <% end %>
 
-          <div class="center-align" id="buttons_zone" >
+          <div class="center-align" id="buttons_zone">
             <%= f.file_field :image, style: "display: none" %>
             <a id="triggerFile" class="waves-effect waves-light btn"><i class="material-icons left">picture_in_picture</i>Image</a>
             <br><br>
@@ -88,13 +88,11 @@
                     <% if current_user.id == @team.user.id %>
                         <%= "<div class='center-align' >".html_safe %>
                         <%= link_to '<i class="col s3 material-icons icon-white ">delete</i>'.html_safe, remove_player_teams_path(team_id: @team.id, player_id: member.id), remote: true, method: :post, data: {confirm: 'Are you sure?'}, class: "btn red darken-1" %>
-                      </div>
-                  <% end %>
-                  </div>
+                    <% end %>
                   </li>
               <% end %>
           <% end %>
-          </ul>
+        </ul>
     <% end %>
     <div id="current_players" class="collection with-header col s4 offset-s1">
       <div id="wrapper" class="input-field">
@@ -108,53 +106,52 @@
         </div>
       </div>
     </div>
-    </div>
-    </div>
-    </div>
-    </div>
+  </div>
+</div>
+</div>
+</div>
 
 
-    <script>
-      $(document).ready(function () {
-        $("#team_image").on('change', function () {
-          //Get count of selected files
-          var countFiles = $(this)[0].files.length;
-          var imgPath = $(this)[0].value;
-          var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
-          var image_holder = $("#image-holder");
-          image_holder.empty();
-          if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
-            if (typeof(FileReader) != "undefined") {
-              //loop for each file selected for uploaded.
-              for (var i = 0; i < countFiles; i++) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                  $("<img />", {
-                    "src": e.target.result,
-                    "class": "thumb-image",
-                    "width": "99%",
-                    "height": "99%"
-                  }).appendTo(image_holder);
-                  $( '<%= link_to '<i class="material-icons icon-white ">delete</i>'.html_safe, delete_image_team_teams_path(id: @team.id), remote: true, method: :post, data: {confirm: 'Are you sure?'}, class: "btn-floating waves-effect waves-light right red" %>' ).insertBefore( ".thumb-image" );
-                }
-                image_holder.show();
-                reader.readAsDataURL($(this)[0].files[i]);
-              }
-            } else {
-              alert("This browser does not support FileReader.");
+<script>
+  $(document).ready(function () {
+    $("#team_image").on('change', function () {
+      //Get count of selected files
+      var countFiles = $(this)[0].files.length;
+      var imgPath = $(this)[0].value;
+      var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
+      var image_holder = $("#image-holder");
+      image_holder.empty();
+      if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
+        if (typeof(FileReader) != "undefined") {
+          //loop for each file selected for uploaded.
+          for (var i = 0; i < countFiles; i++) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+              $("<img />", {
+                "src": e.target.result,
+                "class": "thumb-image",
+                "width": "99%",
+                "height": "99%"
+              }).appendTo(image_holder);
             }
-          } else {
-            alert("Please select only images");
+            image_holder.show();
+            reader.readAsDataURL($(this)[0].files[i]);
           }
-        });
-      });
-    </script>
+        } else {
+          alert("This browser does not support FileReader.");
+        }
+      } else {
+        alert("Please select only images");
+      }
+    });
+  });
+</script>
 
-    <script>
-      $(document).ready(function () {
-        $('#triggerFile').on('click', function (e) {
-          e.preventDefault();
-          $("#team_image").trigger('click');
-        });
-      });
-    </script>
+<script>
+  $(document).ready(function () {
+    $('#triggerFile').on('click', function (e) {
+      e.preventDefault();
+      $("#team_image").trigger('click');
+    });
+  });
+</script>
