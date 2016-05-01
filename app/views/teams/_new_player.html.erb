@@ -2,7 +2,7 @@
     <li class="collection-item">
       <%= "<div class='center-align row' id='#{@player.id}'>".html_safe %>
       <% if current_user.id == @team.user.id %>
-          <h5 class="col s5"><%= @player.name %></h5>
+          <h6 class="col s5"><%= @player.name %></h6>
           <%= "<div class='center-align' >".html_safe %>
           <%= link_to '<i class="col s3 material-icons icon-white ">delete</i>'.html_safe, remove_player_teams_path(team_id: @team.id, player_id: @player.id), remote: true, method: :post, data: {confirm: 'Are you sure?'}, class: "btn red darken-1" %>
           </div>
