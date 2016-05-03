@@ -1,6 +1,7 @@
 <div class="container">
 
-  <h4 class="title">Listing delivered messages</h4>
+  <h2 class="hide-on-med-and-down title">Listing delivered messages</h2>
+  <h5 class="hide-on-large-only title">Listing delivered messages</h5>
 
   <ul class="collection">
     <% @messages.each do |message| %>
@@ -26,7 +27,8 @@
     <% end %>
   </ul>
 
-  <h4 class="title">Listing sended messages</h4>
+  <h2 class="hide-on-med-and-down title">Listing sended messages</h2>
+  <h5 class="hide-on-large-only title">Listing sended messages</h5>
   <ul class="collection">
     <% @messages_sended.each do |message| %>
         <% if message.show_sender %>
