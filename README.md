@@ -1,53 +1,40 @@
-# README #
+# SportsBookings
+A Ruby on Rails and MaterializeCSS to manage sports bookings in a university.
 
-This README would normally document whatever steps are necessary to get your application up and running.
+## Getting Started
+You must be sure rails and ruby are installed in your computer.
 
-### What is this repository for? ###
+### Prerequisities
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
-
-Sportsbooking is a Rails 4 + MaterializeCSS app for booking sports installations.
-
-This is a proyect forn an Agile Development Methods subject created by 6 friends.
-
-### How do I get set up? ###
-
-# 1. Clone the git repo #
-# 2. Run the following commands from a terminal #
+Requires install ImageMagick
+$ sudo apt-get install ImageMagick
 
 ```
-#!bash
-
-- $ bundle
-- $ rake db:setup
-- $ rails server
+sudo gem install ImageMagick
 ```
 
-# 3. Open a browser and go to localhost:3000 #
+### Installing
 
-**There exist two dummy users with the following credentials**
+A step by step series of examples that tell you have to get a development env running
 
-1. test --> 12345678
-1. test1 --> 12345678
+Stay what the step will be
 
-# 4. Select a month to load the datetimes in seed.rb #
+```
+1. $ git clone https://bitbucket.org/ayoseturru/fittable
+2. $ cd fittable
+3. $ bundle install
+4. $ rake db:setup
+5. $ rails s
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+```
 
-### Contribution guidelines ###
+## Built With
 
-* Writing tests
-* Code review
-* Other guidelines
+* Ruby on Rails
+* MaterializeCSS
+* Sqlite3
 
-### Who do I talk to? ###
+## Authors
 
-* Repo owner or admin
-* Other community or team contact
+* **Ayose Suárez** - [Twitter Profile](https://twitter.com/AyoseTurru)
+
